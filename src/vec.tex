@@ -644,8 +644,8 @@ in class \code{Components}. This is because \code{Components} is a
 \code{VectorField} and \code{DiffScalarField}; therefore it does not
 inherits from \code{Element}, but only from the base class \code{SageObject},
 which does not implement any addition.
-We note from lines~17-19 that the computation can be parallelized on the
-components if the user has turned on parallelization\footnote{This is done with the command
+We note from lines~17-19
+that the computation of the components can be done in parallel on more that one CPU core if user has turned on parallelization\footnote{This is done with the command
 \code{Parallelism().set(nproc=8)} (for 8 threads); many examples of
 parallelized computations are presented at
 \url{http://sagemanifolds.obspm.fr/examples.html}.}. Focusing on the sequential code

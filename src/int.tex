@@ -45,7 +45,7 @@ while the computation with \soft{ALAM} took 4 minutes and yielded the
 discovery of 6 errors in the original paper by Bondi et al.
 Since then, numerous packages have been developed; the reader is referred to \cite{MacCa02}
 for a review of computer algebra
-systems for general relativity prior to 2002, and to \cite{KorolKS13} for a more recent review
+systems for general relativity prior to 2002, and to \cite{KorolKS13,BirkaGSC17} for  more recent reviews
 focused on tensor calculus.
 It is also worth to point out the extensive list of
 tensor calculus packages maintained by J. M. Martin-Garcia at
@@ -65,7 +65,9 @@ the \soft{xAct} suite \cite{Marti08} and \soft{Ricci} \cite{ricci}, both
 running atop \soft{Mathematica},
 \soft{DifferentialGeometry} \cite{AnderT12} integrated into \soft{Maple},
 \soft{GRTensorIII} \cite{grtensorIII} atop \soft{Maple}, \soft{Atlas 2} \cite{atlas2}
-for \soft{Mathematica} and \soft{Maple}, and
+for \soft{Mathematica} and \soft{Maple}, \soft{ctensor} and \soft{itensor} for \soft{Maxima}
+\cite{Toth05}
+and
 \soft{SageManifolds} \cite{sagemanifolds} integrated in \soft{SageMath}.
 \item Standalone applications. Recent examples are \soft{Cadabra}
 \cite{Peete07} (field theory),
@@ -79,9 +81,10 @@ they require a proprietary product, the source code of which is closed (\soft{Ma
 
 As far as tensor calculus is concerned, the above packages can be distinguished by
 the type of computation that they perform:
-abstract calculus (\soft{xAct/xTensor}, \soft{Ricci}, \soft{Cadabra}, \soft{Redberry}),
+abstract calculus (\soft{xAct/xTensor}, \soft{Ricci}, \soft{itensor},
+\soft{Cadabra}, \soft{Redberry}),
 or component calculus (\soft{xAct/xCoba}, \soft{DifferentialGeometry}, \soft{GRTensorIII},
-\soft{Atlas 2}, \soft{SageManifolds}).
+\soft{Atlas 2}, \soft{ctensor}, \soft{SageManifolds}).
 In the first category, tensor operations such as contraction or covariant differentiation
 are performed by manipulating the indices themselves rather than the components
 to which they correspond. In the second category, vector frames are explicitly

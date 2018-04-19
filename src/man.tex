@@ -313,7 +313,10 @@ Mathematically, \defin{chart functions}\index{chart!function} are $\K$-valued fu
 the considered chart. They map coordinates to elements of the base field $\K$:
 \jup{ex31.png}
 \jup{ex32.png}
-while scalar fields map manifold points to $\K$:
+Note the use of Python's star operator in \code{*XU(p)} to unpack the tuple of coordinates
+returned by \code{XU(p)} (in the present case: \code{(1,2)}) to positional arguments
+for the function \code{fU} (in the present case: \code{1, 2}).
+On their side, scalar fields map \emph{manifold points}, not coordinates, to $\K$:
 \jup{ex33.png}
 Note that the equality between \code{Out[32]} and \code{Out[33]}
 reflects the identity $f = F \circ X$, where $F$ is the chart function
@@ -613,7 +616,8 @@ is automatically simplified, by means of the method \code{\_simplify}.
 The latter invokes a chain of simplifying functions, which depends on the
 symbolic engine\footnote{See
 \url{https://github.com/sagemath/sage/blob/develop/src/sage/manifolds/utilities.py}
-for details.}.
+for details; note that the simplifications regarding the \soft{SymPy} engine are not
+fully implemented yet.}.
 
 Let us now discuss the second case in the \code{\_\_add\_\_()} method of
 \code{Element}, namely the case for which the parents of both operands are
