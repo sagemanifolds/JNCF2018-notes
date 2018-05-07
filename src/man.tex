@@ -45,9 +45,27 @@ a priori knowledge of \soft{Python} is required, since we shall explain the
 main notations as they appear.
 
 In \Sage{}, manifolds are constructed by means of the global function \code{Manifold}:
+
+\begin{NBin}
+%display latex
+\end{NBin}
+
+\begin{NBin}
+M = Manifold(2, 'M')
+print(M)
+\end{NBin}
+\begin{NBprint}
+2-dimensional differentiable manifold M
+\end{NBprint}
 \jup{ex01.png}
 \jup{ex02.png}
 By default, the function \code{Manifold} returns a manifold over $\K=\R$:
+\begin{NBin}
+M.base_field()
+\end{NBin}
+\begin{NBout}
+$\mathbf{R}$
+\end{NBout}
 \jup{ex03.png}
 Note the use of the standard object-oriented notation (ubiquitous in
 \soft{Python}): the method \code{base\_field()} is called on the object \code{M};

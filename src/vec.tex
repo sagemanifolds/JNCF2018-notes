@@ -651,9 +651,10 @@ that the computation of the components can be done in parallel on more that one 
 parallelized computations are presented at
 \url{http://sagemanifolds.obspm.fr/examples.html}.}
 Focusing on the sequential code (lines~23-24), we see that the addition is
-performed component by component. Each component being an element of
-$C^\infty(U)$ --- the base ring of $\mathfrak{X}(U)$ ---, this addition is that
-of scalar fields, as discussed in Sec.~\ref{s:man:add_implement}.
+performed component by component.
+Note that this addition is that
+of scalar fields, as discussed in Sec.~\ref{s:man:add_implement},
+since each component being an element of $C^\infty(U)$, the base ring of $\mathfrak{X}(U)$.
 
 \subsection{Action of vector fields on scalar fields} \label{s:vec:action_on_scalar}
 

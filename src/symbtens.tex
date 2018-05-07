@@ -22,6 +22,7 @@
 \usepackage{listings}
 \usepackage{tikz}
 \usepackage[framemethod=TikZ]{mdframed} % -> grey boxes
+\usepackage{fancyvrb} % -> fancy verbatim used to mimic Jupyter notebook input
 
 \usetikzlibrary{calc,positioning,shapes,arrows,chains}
 
@@ -73,6 +74,43 @@
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\definecolor{inblue}{rgb}{0,0,0.7}
+\definecolor{outred}{rgb}{0.8,0,0.0}
+
+% Notebook input
+\newsavebox{\FVerbBox}
+\newcounter{NBin}
+\newenvironment{NBin}{\refstepcounter{NBin}
+  \VerbatimEnvironment
+  \begin{lrbox}{\FVerbBox}
+  \begin{minipage}[t]{5.5in}
+  \begin{Verbatim}
+}{
+  \end{Verbatim}
+  \end{minipage}
+  \end{lrbox}
+  \medskip\medskip
+  \par\noindent {\color{inblue} \texttt{In [\theNBin]\!:}}\;\fcolorbox{gray!40}{gray!7}{\usebox{\FVerbBox}}
+  \medskip
+}
+
+% Notebook output
+\newenvironment{NBout}{
+{
+  \par\noindent \color{outred} \texttt{Out[\theNBin]\!:}}
+  \begin{minipage}[t]{5.5in}
+} {
+  \end{minipage}
+}
+
+% Notebook printed output
+\newenvironment{NBprint}{
+\par\hspace{1cm}
+\BVerbatim
+} {
+\endBVerbatim
+}
 
 \lstset{language=Python,
         basicstyle={\footnotesize\ttfamily},
