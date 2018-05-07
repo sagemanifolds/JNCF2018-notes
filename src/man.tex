@@ -77,8 +77,24 @@ must be specified with the optional keyword \code{field}, like
 \code{M = Manifold(2, 'M', field='complex')}
 \end{flushleft}
 We may check that $M$ is a topological space:
+\begin{NBin}
+M in Sets().Topological()
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 \jup{ex04.png}
 Actually, $M$ belongs to the following categories:
+\begin{NBin}
+M.categories()
+\end{NBin}
+\begin{NBout}
+\vspace{-25pt}  % manual hacking of the spacing; best I can do for right now -- TS
+\begin{gather*}
+\left[\mathbf{Smooth}_{\mathbf{R}}, \mathbf{Differentiable}_{\mathbf{R}}, \mathbf{Manifolds}_{\mathbf{R}}, \mathbf{TopologicalSpaces}(\mathbf{Sets}), \right.
+\\ \left. \mathbf{Sets},  \mathbf{SetsWithPartialMaps}, \mathbf{Objects}\right]
+\end{gather*}
+\end{NBout}
 \jup{ex05.png}
 As we can see from the first category in the above list, \code{Manifold}
 constructs a smooth manifold by default.
@@ -101,13 +117,35 @@ and points on them (\code{ManifoldPoint}).}
 Manifolds are implemented by the Python classes \code{TopologicalManifold}
 and \\ \code{DifferentiableManifold} (see Fig.~\ref{f:man:domain_classes}),
 actually by dynamically generated subclasses of those, via \Sage{} category
-framework\footnote{See \url{http://doc.sagemath.org/html/en/reference/categories/sage/categories/primer.html}\index{category} for details.}:
+framework:\footnote{See \url{http://doc.sagemath.org/html/en/reference/categories/sage/categories/primer.html}\index{category} for details.}
+\begin{NBin}
+type(M)
+\end{NBin}
+\begin{NBout}
+\begin{verbatim}
+<class 'sage.manifolds.differentiable.manifold.
+DifferentiableManifold_with_category'>
+\end{verbatim}
+\end{NBout}
 \jup{ex06.png}
 Notice that the actual class of \code{M} is \code{DifferentiableManifold-with-category}.
 It is a subclass of \code{DifferentiableManifold}:
+\begin{NBin}
+isinstance(M,
+   sage.manifolds.differentiable.manifold.DifferentiableManifold)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 \jup{ex07.png}
 and hence of
 \code{TopologicalManifold} according to the inheritance diagram of Fig.~\ref{f:man:domain_classes}:
+\begin{NBin}
+isinstance(M, sage.manifolds.manifold.TopologicalManifold)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 \jup{ex08.png}
 Notice that \code{TopologicalManifold} itself is a subclass of \code{ManifoldSubset} (the class
 for generic subsets of a manifold), which reflects the fact that $M\subset M$.
@@ -131,17 +169,44 @@ that both $X$ and $X^{-1}$ are continuous.}
 \ee
 We declare a chart, along with the symbols used to denote the coordinates
 (here $x=x^0$ and $y=x^1$) by
+\begin{NBin}
+U = M.open_subset('U')
+XU.<x,y> = U.chart()
+XU
+\end{NBin}
+\begin{NBout}
+$(U, (x,y))$
+\end{NBout}
 \jup{ex09.png}
 Open subsets of a differentiable manifold are implemented by a (dynamically generated) subclass of
 \code{DifferentiableManifold}, since they are differentiable manifolds in their own:
+\begin{NBin}
+isinstance(U,
+   sage.manifolds.differentiable.manifold.DifferentiableManifold)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 \jup{ex10.png}
 
-Points on $M$ are created from their coordinates in a given
-chart:
+Points on $M$ are created from their coordinates in a given chart:
+\begin{NBin}
+p = U((1,2), chart=XU, name='p')
+print(p)
+\end{NBin}
+\begin{NBprint}
+Point p on the 2-dimensional differentiable manifold M
+\end{NBprint}
 \jup{ex11.png}
 The syntax \code{U(...)} used to create $p$ as an element of $U$
 reflects the parent/element\index{parent}\index{element} pattern employed in \Sage{}; indeed $U$
 is the parent of $p$:
+\begin{NBin}
+p.parent()
+\end{NBin}
+\begin{NBout}
+$U$
+\end{NBout}
 \jup{ex12.png}
 Points are implemented by a dynamically generated subclass of
 \code{ManifoldPoint} (cf.\ Fig.~\ref{f:man:domain_classes}).
@@ -151,6 +216,12 @@ a Python dictionary,\footnote{A \defin{dictionary}\index{dictionary},
 also known as \defin{associative array}, is a
 data structure that generalizes the concept of array in the sense that the
 key to access to an element is not restricted to an integer or a tuple of integers.} whose keys are the charts:
+\begin{NBin}
+p._coordinates
+\end{NBin}
+\begin{NBout}
+$\{(U, (x,y)): (1,2)\}$
+\end{NBout}
 \jup{ex13.png}
 The leading underscore in the name \code{\_coordinates} is a notation
 convention to specify that this attribute is a \defin{private} one:
@@ -163,6 +234,12 @@ this private attribute here
 because we are precisely interested in implementation features.
 The public way to recover the point's coordinates is to let the chart act on
 the point (reflecting thereby the definition~\eqref{e:man:def_chart} of a chart):
+\begin{NBin}
+XU(p)
+\end{NBin}
+\begin{NBout}
+$(1,2)$
+\end{NBout}
 \jup{ex14.png}
 
 Usually, one needs more than a single coordinate system to cover $\M$.
@@ -173,8 +250,25 @@ such that the union of all $U_i$'s covers $\M$:
     \bigcup_{i\in I} U_i = \M.
 \ee
 Here we introduce a second chart on $\M$:
+\begin{NBin}
+V = M.open_subset('V')
+XV.<xp,yp> = V.chart("xp:x' yp:y'")
+XV
+\end{NBin}
+\begin{NBout}
+$\left( V, (x', y') \right)$
+\end{NBout}
 \jup{ex15.png}
 and declare that $\M$ is covered by only two charts, i.e.\ that $M=U\cup V$:
+\begin{NBin}
+M.declare_union(U, V)
+\end{NBin}
+\begin{NBin}
+M.atlas()
+\end{NBin}
+\begin{NBout}
+$\left[ \left(U, (x,y) \right), \left( V, (x', y') \right) \right]$
+\end{NBout}
 \jup{ex16.png}
 \jup{ex17.png}
 
@@ -215,6 +309,21 @@ Amazingly, in the case of $\R^n$, there exists a unique smooth structure (the st
 
 For the manifold $M$ under consideration, we define the transition map \code{XU}~$\to$~\code{XV}
 on $W = U\cap V$ as follows:
+\begin{NBin}
+XU_to_XV = XU.transition_map(XV,
+                             (x/(x^2+y^2), y/(x^2+y^2)),
+                             intersection_name='W',
+                             restrictions1= x^2+y^2!=0,
+                             restrictions2= xp^2+yp^2!=0)
+XU_to_XV.display()
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+\begin{cases}
+x' = \frac{x}{x^2+y^2} \\
+y' = \frac{y}{x^2+y^2}
+\end{cases}$
+\end{NBout}
 \jup{ex18.png}
 The argument \code{restrictions1} means that
 $W = U\setminus \{S\}$, where $S$ is the point of coordinates $(x,y)=(0,0)$,
@@ -228,6 +337,16 @@ Since $M=U\cup V$, we have then
 \ee
 The transition map \code{XV}~$\to$~\code{XU} is obtained by computing the inverse
 of the one defined above:
+\begin{NBin}
+XU_to_XV.inverse().display()
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+\begin{cases}
+x = \frac{x'}{x'^2+y'^2} \\
+y = \frac{y'}{x'^2+y'^2}
+\end{cases}$
+\end{NBout}
 \jup{ex19.png}
 At this stage, the smooth manifold $M$ is fully specified, being covered by
 one atlas with all transition maps specified. The reader may have recognized that
@@ -242,9 +361,22 @@ from the North pole $N$ (resp. the South pole $S$).
 Since the transition maps have been defined,
 we can ask for the coordinates $(x',y')$ of the point $p$, whose $(x,y)$
 coordinates were $(1,2)$:
+\begin{NBin}
+XV(p)
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+\left( \frac{1}{5}, \frac{2}{5} \right)$
+\end{NBout}
 \jup{ex20.png}
 This operation has updated the internal dictionary \code{\_coordinates}
 (compare with \code{Out~[13]}):
+\begin{NBin}
+p._coordinates
+\end{NBin}
+\begin{NBout}
+$\displaystyle \left\{ (U, (x,y)) : (1,2), \left( V, (x', y') \right) : \left( \frac{1}{5}, \frac{2}{5} \right) \right\}$
+\end{NBout}
 \jup{ex21.png}
 
 \subsection{Smooth maps}
@@ -262,13 +394,44 @@ Back to our example manifold, a natural smooth map is the embedding of $\Sp$ in
 $\R^3$. To define it, we start by declaring $\R^3$ as a 3-dimensional smooth
 manifold, canonically endowed with a single chart, that of Cartesian coordinates
 $(X,Y,Z)$:
+\begin{NBin}
+R3 = Manifold(3, 'R^3', r'\mathbb{R}^3')
+XR3.<X,Y,Z> = R3.chart()
+XR3
+\end{NBin}
+\begin{NBout}
+$\left( \mathbb{R}^3, (X,Y,Z) \right)$
+\end{NBout}
 \jup{ex22.png}
 The embedding $\Phi: \Sp \to \R^3$ is then defined in terms of its coordinate
 expression in the two charts covering $M=\Sp$:
+\begin{NBin}
+Phi = M.diff_map(R3, {(XU, XR3):
+                      [2*x/(1+x^2+y^2), 2*y/(1+x^2+y^2),
+                       (x^2+y^2-1)/(1+x^2+y^2)],
+                      (XV, XR3):
+                       [2*xp/(1+xp^2+yp^2), 2*yp/(1+xp^2+yp^2),
+                        (1-xp^2-yp^2)/(1+xp^2+yp^2)]},
+                 name='Phi', latex_name=r'\Phi')
+Phi.display()
+\end{NBin}
+\begin{NBout}
+$
+\begin{array}{llcl} \Phi:& M & \longrightarrow & \mathbb{R}^3 \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, x}{x^{2} + y^{2} + 1}, \frac{2 \, y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, {x'}}{{x'}^{2} + {y'}^{2} + 1}, \frac{2 \, {y'}}{{x'}^{2} + {y'}^{2} + 1}, -\frac{{x'}^{2} + {y'}^{2} - 1}{{x'}^{2} + {y'}^{2} + 1}\right) \end{array}
+$
+\end{NBout}
 \jup{ex23.png}
 We may use $\Phi$ for graphical purposes, for instance to display the grids
 of the stereographic charts \code{XU} (in red) and \code{XV} (in green),
 with the point $p$ atop:
+\begin{NBin}
+graph = XU.plot(chart=XR3, mapping=Phi, number_values=25,
+                label_axes=False) + \
+        XV.plot(chart=XR3, mapping=Phi, number_values=25,
+                color='green', label_axes=False) + \
+        p.plot(chart=XR3, mapping=Phi, label_offset=0.05)
+show(graph, viewer='threejs', online=True)
+\end{NBin}
 \jup{ex24.png}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
