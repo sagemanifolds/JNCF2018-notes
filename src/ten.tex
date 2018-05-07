@@ -12,7 +12,7 @@ as in Chap.~\ref{s:man} and \ref{s:vec}.
 
 Let us continue with the same example notebook as that considered in
 Chap.~\ref{s:vec}. There, we had introduced $f$ as a scalar field on
-the 2-dimensional manifold $M = \mathbb{S}^2$ (cf. Sec.~\ref{s:vec:tangent_impl}).
+the 2-dimensional manifold $M = \mathbb{S}^2$ (cf.\ Sec.~\ref{s:vec:tangent_impl}).
 The differential of $f$ is a 1-form on $M$:
 \jup{te80.png}
 \jup{te81.png}
@@ -52,10 +52,10 @@ considered as a $C^\infty(M)$-module:
 \jup{te94.png}
 This module is actually the dual of the vector-field module $\mathfrak{X}(M)$,
 which is represented
-by the Python object \code{YM} (cf. Sec.~\ref{s:vec:vector_field_impl}):
+by the Python object \code{YM} (cf.\ Sec.~\ref{s:vec:vector_field_impl}):
 \jup{te95.png}
 Consequently, a 1-form acts on vector fields, yielding an element of
-$C^\infty(M)$, i.e. a scalar field:
+$C^\infty(M)$, i.e.\ a scalar field:
 \jup{te96.png}
 This scalar field is nothing but the result of the action of $\w{v}$ on $f$
 discussed in Sec.~\ref{s:vec:action_on_scalar}:
@@ -93,7 +93,7 @@ The standard metric on $M=\mathbb{S}^2$ is that induced by the Euclidean metric 
 The metric $g$ on $M$ is the pullback of $h$ associated with the embedding $\Phi$
 introduced in Sec.~\ref{s:vec:tangent_impl}:
 \jup{te108.png}
-Note that we could have defined $g$ intrinsically, i.e. by providing its components in the two vector frames \code{eU} and \code{eV}, as we did for the metric $h$ on $\mathbb{R}^3$. Instead, we have chosen to get it as the pullback by $\Phi$ of $h$, as an example of pullback associated with some differential map.
+Note that we could have defined $g$ intrinsically, i.e.\ by providing its components in the two vector frames \code{eU} and \code{eV}, as we did for the metric $h$ on $\mathbb{R}^3$. Instead, we have chosen to get it as the pullback by $\Phi$ of $h$, as an example of pullback associated with some differential map.
 
 The metric is a symmetric tensor field of type (0,2):
 \jup{te109.png}
@@ -130,11 +130,11 @@ The components of the Riemann tensor in the default frame on $M$ are
 The parent of the Riemann tensor is the $C^\infty(M)$-module of
 type-(1,3) tensor fields on $M$:
 \jup{te124.png}
-The Riemann tensor is antisymmetric on its two last indices (i.e. the indices
+The Riemann tensor is antisymmetric on its two last indices (i.e.\ the indices
 at position 2 and 3, the first index being at position 0):
 \jup{te125.png}
 The Riemann tensor of the Euclidean metric $h$ on $\mathbb{R}^3$ is identically zero,
-i.e. $h$ is a flat metric:
+i.e.\ $h$ is a flat metric:
 \jup{te126.png}
 The Ricci tensor is
 \jup{te127.png}

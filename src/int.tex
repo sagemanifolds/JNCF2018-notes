@@ -5,10 +5,10 @@
 \section{What is tensor calculus on manifolds?}
 
 While we shall provide precise definitions of the involved mathematical
-objects in Chaps.~\ref{s:man} and \ref{s:vec},
+objects in Chaps.~\ref{s:man} and~\ref{s:vec},
 we outline here briefly what is meant by
 \emph{tensor calculus}. Basically, this is calculus on vector fields,
-and more generally tensor fields, on differentiable manifolds, involving the following operations \cite{Lee13}:
+and more generally tensor fields, on differentiable manifolds, involving the following operations~\cite{Lee13}:
 \begin{itemize}
 \item arithmetics of tensor fields;
 \item tensor product, contraction;
@@ -20,7 +20,7 @@ and more generally tensor fields, on differentiable manifolds, involving the fol
 \end{itemize}
 Moreover, on pseudo-Riemannian manifolds, i.e. differentiable manifolds endowed
 with a metric tensor, we may add the following
-operations \cite{Lee97,ONeil83}:
+operations~\cite{Lee97,ONeil83}:
 \begin{itemize}
 \item musical isomorphisms (i.e. raising and lowering indices with the metric tensor);
 \item covariant derivatives with the Levi-Civita connection;
@@ -35,17 +35,17 @@ operations \cite{Lee97,ONeil83}:
 Symbolic tensor calculus has a long history, which started
 almost as soon as computer algebra itself in the 1960s.
 Probably, the first tensor calculus program was \soft{GEOM}, written by J.G.~Fletcher
-in 1965 \cite{Fletc67}. Its main capability was to compute the Riemann tensor
-of a given metric. In 1969, R.A. d'Inverno developed \soft{ALAM}
+in 1965~\cite{Fletc67}. Its main capability was to compute the Riemann tensor
+of a given metric. In 1969, R.A.~d'Inverno developed \soft{ALAM}
 (for \emph{Atlas Lisp Algebraic Manipulator}) and used it to compute
 the Riemann and Ricci tensors of the Bondi metric.
-According to \cite{Skea94},
+According to~\cite{Skea94},
 the original calculations took Bondi and collaborators 6 months to finish,
 while the computation with \soft{ALAM} took 4 minutes and yielded the
 discovery of 6 errors in the original paper by Bondi et al.
-Since then, numerous packages have been developed; the reader is referred to \cite{MacCa02}
+Since then, numerous packages have been developed; the reader is referred to~\cite{MacCa02}
 for a review of computer algebra
-systems for general relativity prior to 2002, and to \cite{KorolKS13,BirkaGSC17} for  more recent reviews
+systems for general relativity prior to 2002, and to~\cite{KorolKS13,BirkaGSC17} for more recent reviews
 focused on tensor calculus.
 It is also worth to point out the extensive list of
 tensor calculus packages maintained by J. M. Martin-Garcia at
@@ -61,18 +61,16 @@ classified in two categories:
 \item Applications atop some general purpose computer algebra system.
 Notable examples\footnote{See \url{https://en.wikipedia.org/wiki/Tensor_software}
 for more examples.} are
-the \soft{xAct} suite \cite{Marti08} and \soft{Ricci} \cite{ricci}, both
+the \soft{xAct} suite~\cite{Marti08} and \soft{Ricci}~\cite{ricci}, both
 running atop \soft{Mathematica},
-\soft{DifferentialGeometry} \cite{AnderT12} integrated into \soft{Maple},
-\soft{GRTensorIII} \cite{grtensorIII} atop \soft{Maple}, \soft{Atlas 2} \cite{atlas2}
-for \soft{Mathematica} and \soft{Maple}, \soft{ctensor} and \soft{itensor} for \soft{Maxima}
-\cite{Toth05}
+\soft{DifferentialGeometry}~\cite{AnderT12} integrated into \soft{Maple},
+\soft{GRTensorIII}~\cite{grtensorIII} atop \soft{Maple}, \soft{Atlas 2}~\cite{atlas2}
+for \soft{Mathematica} and \soft{Maple}, \soft{ctensor} and \soft{itensor} for \soft{Maxima}~\cite{Toth05}
 and
-\soft{SageManifolds} \cite{sagemanifolds} integrated in \soft{SageMath}.
-\item Standalone applications. Recent examples are \soft{Cadabra}
-\cite{Peete07} (field theory),
-\soft{SnapPy} \cite{snappy} (topology and geometry of 3-manifolds)  and
-\soft{Redberry} \cite{BolotP13} (tensors); older examples can be found in
+\soft{SageManifolds}~\cite{sagemanifolds} integrated in \soft{SageMath}.
+\item Standalone applications. Recent examples are \soft{Cadabra}~\cite{Peete07} (field theory),
+\soft{SnapPy}~\cite{snappy} (topology and geometry of 3-manifolds)  and
+\soft{Redberry}~\cite{BolotP13} (tensors); older examples can be found in
 Ref.~\cite{MacCa02}.
 \end{enumerate}
 All applications listed in the second category are free software. In
@@ -108,7 +106,7 @@ among which are \soft{Maxima}, \soft{Pynac} and \soft{SymPy} (symbolic calculati
 \Sage{} provides a uniform Python interface to all these packages; however,
 \Sage{} is much more than a mere interface: it contains a large and increasing part of
 original code (more than 750,000 lines of Python and Cython, involving 5344 classes).
-\Sage{} was created in 2005 by W. Stein \cite{SteinJ05} and since
+\Sage{} was created in 2005 by W.~Stein~\cite{SteinJ05} and since
 then its development has been sustained by more than a hundred researchers
 (mostly mathematicians). Very good introductory textbooks about \Sage{} are
 \cite{JoyneS14,Zimme13,Zimme18,Bard15}.
@@ -134,9 +132,9 @@ and one distinguishes \defin{parent} types, which model mathematical
 sets with some structure (e.g. algebraic structure), from \defin{element} types,
 which model set elements. Moreover, each parent belongs to some
 dynamically generated class that encodes information
-about its \emph{category}, in the mathematical sense of the word\footnote{See
+about its \emph{category}, in the mathematical sense of the word.\footnote{See
 \url{http://doc.sagemath.org/html/en/reference/categories/sage/categories/primer.html}
-for a discussion of \Sage{}'s category framework}.
+for a discussion of \Sage{}'s category framework}
 Automatic conversion rules, called \defin{coercions}\index{coercion},
 prior to a binary operation, e.g. $x+y$ with $x$ and $y$ having different
 parents, are implemented.
@@ -148,10 +146,10 @@ a \emph{symbolic tensor calculus method} that
 \begin{itemize}
 \item runs on fully specified smooth manifolds (described by an atlas);
 \item is not limited to a single coordinate chart or vector frame;
-\item runs even on non-parallelizable manifolds (i.e. manifolds that cannot
+\item runs even on non-parallelizable manifolds (i.e.\ manifolds that cannot
 be covered by a single vector frame);
-\item is independent of the symbolic engine (e.g.  \soft{Pynac/Maxima},
-\soft{SymPy},...) used to perform calculus at the level of coordinate expressions.
+\item is independent of the symbolic engine (e.g., \soft{Pynac/Maxima},
+\soft{SymPy}, ...) used to perform calculus at the level of coordinate expressions.
 \end{itemize}
 The aim is to present not only the main ideas of the method, but also some details of its implementation in \Sage{}. This implementation has been
 performed via the \soft{SageManifolds} project:

@@ -25,7 +25,7 @@ such that (i) $\w{v}$ is $\K$-linear and (ii) $\w{v}$ obeys
     \forall f,g \in C^\infty(M),\quad
         \w{v}(fg) = \w{v}(f) g(p) + f(p) \w{v}(g) .
 \ee
-Because of property (\ref{e:vec:derivation}), one says that $\w{v}$ is
+Because of property~\eqref{e:vec:derivation}, one says that $\w{v}$ is
 a \defin{derivation at} $p$.
 
 The set $T_p\M$ of all tangent vectors at $p$ is a vector space of dimension
@@ -66,7 +66,7 @@ Tangent spaces are implemented as a class inherited from \code{TangentSpace}
 via the category framework:
 \jup{ve11.png}
 The class \code{TangentSpace} itself inherits from the generic class
-\code{FiniteRankFreeModule}\footurl{http://doc.sagemath.org/html/en/reference/tensor_free_modules/sage/tensor/modules/finite_rank_free_module.html}, which, in \Sage{}, is devoted to free modules of finite rank
+\code{FiniteRankFreeModule},\footurl{http://doc.sagemath.org/html/en/reference/tensor_free_modules/sage/tensor/modules/finite_rank_free_module.html}, which, in \Sage{} is devoted to free modules of finite rank
 without any distinguished basis:
 \jup{ve12.png}
 \begin{remark}
@@ -138,14 +138,14 @@ $T\M$ is a smooth manifold of dimension $2n$ over $\K$ ($n$ being the dimension
 of $\M$).
 
 A \defin{vector field}\index{vector!field} on $\M$ is a continuous
-right-inverse of the projection map, i.e. it is a map
+right-inverse of the projection map, i.e.\ it is a map
 \be
     \begin{array}{cccc}
     \w{v} : & \M & \longrightarrow & T\M \\
         & p & \longmapsto & \left. \w{v}\right| _p
     \end{array}
 \ee
-such that $\pi\circ \w{v} = \mathrm{Id}_{\M}$, i.e. such that
+such that $\pi\circ \w{v} = \mathrm{Id}_{\M}$, i.e.\ such that
 \be
     \forall p\in \M, \quad \left. \w{v}\right| _p \in T_p\M .
 \ee
@@ -179,7 +179,7 @@ in the vector space $T_p\M$.
 \end{enumerate}
 An important subcase of 2 is when $\X(\M)$ is a
 \defin{free module}\index{free module}\index{module!free --} over $C^\infty(M)$,
-i.e. when $\X(\M)$ admits a basis\index{basis} (a generating set consisting of linearly independent elements). If this occurs, then $\X(\M)$ is actually a
+i.e.\ when $\X(\M)$ admits a basis\index{basis} (a generating set consisting of linearly independent elements). If this occurs, then $\X(\M)$ is actually a
 \defin{free module of finite rank}\index{free module!of finite rank}\index{finite rank!free module of --} over $C^\infty(M)$ and its rank is $n$ -- the dimension of
 $\M$ over $\K$, which means that all bases share the same cardinality, namely $n$.
 One says that $\M$ is a \defin{parallelizable}\index{parallelizable} manifold.
@@ -192,7 +192,7 @@ frame\footnote{Einstein's convention for summation on repeated indices is assume
 \be \label{e:vec:v_expand}
     \forall \w{v}\in\X(\M),\quad \w{v} = v^a \w{e}_a,\quad\mbox{with\ } v^a \in C^\infty(\M) .
 \ee
-At each point $p\in \M$, Eq.~(\ref{e:vec:v_expand}) gives birth to an identity in
+At each point $p\in \M$, Eq.~\eqref{e:vec:v_expand} gives birth to an identity in
 the tangent space $T_p \M$:
 \be
     \left.\w{v} \right| _p = v^a(p)  \left.\w{e}_a \right| _p,\quad\mbox{with\ } v^a(p) \in \K ,
@@ -201,7 +201,7 @@ which is nothing but the expansion of the tangent vector $\left.\w{v} \right| _p
 on the basis $(\left.\w{e}_a \right| _p)_{1\leq a \leq n}$ of the
 vector space $T_p \M$.
 
-Note that if $\M$ is covered by a chart $X$, i.e. $\M$ is the domain of
+Note that if $\M$ is covered by a chart $X$, i.e.~$\M$ is the domain of
 the chart $X$, then $\M$ is parallelizable and a vector frame
 is $(\partial/\partial x^a)_{1\leq a \leq n}$, where the $x^a$'s are
 the coordinates of chart $X$. Such a vector frame is called a
@@ -213,7 +213,7 @@ the coordinates of chart $X$. Such a vector frame is called a
 \item the torus $\mathbb{T}^2 = \mathbb{S}^1\times \mathbb{S}^1$,
 \item the sphere $\mathbb{S}^3 \simeq \mathrm{SU}(2)$, as any Lie group,
 \item the sphere $\mathbb{S}^7$,
-\item any orientable 3-manifold (Steenrod theorem \cite{Steen51}).
+\item any orientable 3-manifold (Steenrod theorem~\cite{Steen51}).
 \end{itemize}
 On the other hand, examples of non-parallelizable manifolds are
 \begin{itemize}
@@ -230,16 +230,16 @@ at least two charts to cover them.
 \subsection{SageMath implementation} \label{s:vec:vector_field_impl}
 
 Among the two algebraic structures for $\X(\M)$ discussed in Sec.~\ref{s:vec:vector_module},
-we select the second one, i.e. we consider $\X(\M)$ as a $C^\infty(M)$-module.
+we select the second one, i.e.\ we consider $\X(\M)$ as a $C^\infty(M)$-module.
 With respect to the infinite-dimensional $\K$-vector space point of view,
 the advantage for the implementation is the reduction to finite-dimensional structures: free modules of rank $n$ on parallelizable open subsets of $\M$.
-Indeed, if $U$ is such an open subset, i.e. if $\X(U)$ is a free $C^\infty(U)$-module
+Indeed, if $U$ is such an open subset, i.e.\ if $\X(U)$ is a free $C^\infty(U)$-module
 of rank $n$, the generic class \code{FiniteRankFreeModule} discussed in
 Sec.~\ref{s:vec:tangent_impl} can be used to implement $\X(U)$. The great benefit
 is that all calculus implemented on the free module elements, like the addition
 or the scalar multiplication, can be used as such for vector fields.
 This implies that vector fields will be described by their (scalar-field) components
-on vector frames, as defined by Eq.~(\ref{e:vec:v_expand}), on parallelizable
+on vector frames, as defined by Eq.~\eqref{e:vec:v_expand}, on parallelizable
 open subsets of $\M$.
 
 If the manifold $\M$ is not parallelizable,
@@ -305,7 +305,7 @@ being the domain of a coordinate chart:
 \jup{ve33.png}
 We can check that in $U$'s atlas, at least one chart has $U$ for domain:
 \jup{ve34.png}
-This chart is \code{XU} = $(U, (x,y))$, i.e. the chart of stereographic coordinates
+This chart is \code{XU} = $(U, (x,y))$, i.e.\ the chart of stereographic coordinates
 from the North pole.
 The rank of $\X(U)$ as a free $C^\infty(U)$-module is the manifold's dimension:
 \jup{ve35.png}
@@ -341,7 +341,7 @@ actually the restrictions of the vector frames \code{eU} and \code{eV} to
 $W$:
 \jup{ve43.png}
 The free module $\X(W)$ is also automatically endowed with automorphisms
-connecting the two bases, i.e. change-of-frame operators:
+connecting the two bases, i.e.\ change-of-frame operators:
 \jup{ve44.png}
 The first of them is
 \jup{ve45.png}
@@ -359,7 +359,7 @@ Notice that, at this stage, we have defined $\w{v}$ only on $U$, by setting
 its components in the vector frame \code{eU}, either explicitly as scalar
 fields, like the component $v^0$ set to the restriction of $f$ to $U$ or
 implicitly, like the component $v^1$: the integer \code{-2}
-will be coerced to the constant scalar field of value $-2$ (cf. Sec.~\ref{s:man:add_implement}).
+will be coerced to the constant scalar field of value $-2$ (cf.\ Sec.~\ref{s:man:add_implement}).
 We can ask for the scalar-field value of a component via the double-bracket
 operator; since \code{eU} is the default frame on $M$, we do not have to specify
 it:
@@ -453,7 +453,7 @@ this figure. For instance, the class \code{VectorFieldParal} is declared as
 \end{figure}
 The defining data of $\left. \w{v}\right| _U$ are
 its sets of components with respect to (possibly various)
-vector frames on $U$, according to Eq.~(\ref{e:vec:vi_expand}). The sets of components are stored in the private dictionary \code{\_components}, whose keys are the vector frames:
+vector frames on $U$, according to Eq.~\eqref{e:vec:vi_expand}. The sets of components are stored in the private dictionary \code{\_components}, whose keys are the vector frames:
 \jup{ve68.png}
 Similarly, we have:
 \jup{ve69.png}
@@ -466,7 +466,7 @@ As already mentioned in Sec.~\ref{s:vec:tangent_impl}, the components themselves
 in the private attribute \code{\_comp} of the \code{Components} object; this is a dictionary
 whose keys are the indices:
 \jup{ve72.png}
-The difference with the tangent vector case is that the values of that dictionary are now scalar fields, i.e. elements of $C^\infty(U)$ in the present case. This is of course in agreement with the treatment of $\mathfrak{X}(U)$ as a free module over $C^\infty(U)$,
+The difference with the tangent vector case is that the values of that dictionary are now scalar fields, i.e.\ elements of $C^\infty(U)$ in the present case. This is of course in agreement with the treatment of $\mathfrak{X}(U)$ as a free module over $C^\infty(U)$,
 as discussed in Sec.~\ref{s:vec:vector_field_impl}.
 Taking into account the storage of scalar fields presented in Sec.~\ref{s:man:def_scalar},
 the full storage structure of vector fields is presented in Fig.~\ref{f:vec:storage_tensor}
@@ -509,9 +509,9 @@ def __add__(left, right):
     ...
 \end{lstlisting}
 This is exactly the same method \code{\_\_add\_\_()} as that discussed in
-Sec.~\ref{s:man:add_implement} for the addition of scalar fields (cf. page~\pageref{p:man:list___add__}), namely
+Sec.~\ref{s:man:add_implement} for the addition of scalar fields (cf.\ page~\pageref{p:man:list___add__}), namely
 the method \code{\_\_add\_\_()} of the top-level class \code{Element}, from
-which both \code{VectorField} and \code{DiffScalarField} inherit, cf. the inheritance
+which both \code{VectorField} and \code{DiffScalarField} inherit, cf.\ the inheritance
 diagrams of Figs.~\ref{f:vec:tensorfield_classes} and
 \ref{f:man:scalar_classes} (taking into account that
 \code{CommutativeAlgebraElement} is a subclass of \code{Element}).
@@ -591,8 +591,9 @@ def _add_(self, other):
 File:   .../site-packages/sage/tensor/modules/free_module_tensor.py
 \end{lstlisting}
 From line~26, we see that this method \code{\_add\_()} is implemented
-at the level of tensors on free modules, i.e. in the class
-\code{FreeModuleTensor}\footurl{http://doc.sagemath.org/html/en/reference/tensor_free_modules/sage/tensor/modules/free_module_tensor.html}, from which \code{VectorFieldParal} inherits (cf. the diagram in
+at the level of tensors on free modules, i.e.\ in the class
+\code{FreeModuleTensor},\footurl{http://doc.sagemath.org/html/en/reference/tensor_free_modules/sage/tensor/modules/free_module_tensor.html}
+from which \code{VectorFieldParal} inherits (cf.\ the diagram in
 Fig.~\ref{f:vec:tensorfield_classes}). Here the free module is clearly
 $\mathfrak{X}(U)$. The addition amounts to adding the components in a
 basis of the free module in which both operands have known components. Such
@@ -645,11 +646,11 @@ in class \code{Components}. This is because \code{Components} is a
 inherits from \code{Element}, but only from the base class \code{SageObject},
 which does not implement any addition.
 We note from lines~17-19
-that the computation of the components can be done in parallel on more that one CPU core if user has turned on parallelization\footnote{This is done with the command
+that the computation of the components can be done in parallel on more that one CPU core if user has turned on parallelization.\footnote{This is done with the command
 \code{Parallelism().set(nproc=8)} (for 8 threads); many examples of
 parallelized computations are presented at
-\url{http://sagemanifolds.obspm.fr/examples.html}.}. Focusing on the sequential code
-(lines~23-24), we see that the addition is
+\url{http://sagemanifolds.obspm.fr/examples.html}.}
+Focusing on the sequential code (lines~23-24), we see that the addition is
 performed component by component. Each component being an element of
 $C^\infty(U)$ --- the base ring of $\mathfrak{X}(U)$ ---, this addition is that
 of scalar fields, as discussed in Sec.~\ref{s:man:add_implement}.
@@ -657,7 +658,7 @@ of scalar fields, as discussed in Sec.~\ref{s:man:add_implement}.
 \subsection{Action of vector fields on scalar fields} \label{s:vec:action_on_scalar}
 
 The action of $\w{v}$ on $f$ is defined pointwise by
-considering $\w{v}$ at each point $p\in M$ as a derivation (the very definition of a tangent vector, cf. Sec.~\ref{s:vec:def_tangent_vector}); the result is then a
-scalar field $\w{v}(f)$ on $M$:
+considering $\w{v}$ at each point $p\in M$ as a derivation (the very definition of a tangent vector,
+cf.\ Sec.~\ref{s:vec:def_tangent_vector}); the result is then a scalar field $\w{v}(f)$ on $M$:
 \jup{ve78.png}
 \jup{ve79.png}
