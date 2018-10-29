@@ -38,7 +38,7 @@ Let us start to discuss the implementation of manifolds in \Sage{}. We shall
 do it on a concrete example, exposed in a Jupyter notebook which can be downloaded
 from the page devoted to these lectures:
 \begin{center}
-\url{http://sagemanifolds.obspm.fr/jncf2018/}
+\url{https://sagemanifolds.obspm.fr/jncf2018/}
 \end{center}
 As for all \Sage{}, the syntax used in this notebook is \soft{Python} one. However, no
 a priori knowledge of \soft{Python} is required, since we shall explain the
@@ -57,8 +57,6 @@ print(M)
 \begin{NBprint}
 2-dimensional differentiable manifold M
 \end{NBprint}
-\jup{ex01.png}
-\jup{ex02.png}
 By default, the function \code{Manifold} returns a manifold over $\K=\R$:
 \begin{NBin}
 M.base_field()
@@ -66,7 +64,6 @@ M.base_field()
 \begin{NBout}
 $\mathbf{R}$
 \end{NBout}
-\jup{ex03.png}
 Note the use of the standard object-oriented notation (ubiquitous in
 \soft{Python}): the method \code{base\_field()} is called on the object \code{M};
 since this method does not require any extra argument (all the information lies
@@ -83,7 +80,6 @@ M in Sets().Topological()
 \begin{NBout}
 \texttt{True}
 \end{NBout}
-\jup{ex04.png}
 Actually, $M$ belongs to the following categories:
 \begin{NBin}
 M.categories()
@@ -95,7 +91,6 @@ M.categories()
 \\ \left. \mathbf{Sets},  \mathbf{SetsWithPartialMaps}, \mathbf{Objects}\right]
 \end{gather*}
 \end{NBout}
-\jup{ex05.png}
 As we can see from the first category in the above list, \code{Manifold}
 constructs a smooth manifold by default.
 If one would like to stick to the topological level, one should add
@@ -127,17 +122,15 @@ type(M)
 DifferentiableManifold_with_category'>
 \end{verbatim}
 \end{NBout}
-\jup{ex06.png}
 Notice that the actual class of \code{M} is \code{DifferentiableManifold-with-category}.
 It is a subclass of \code{DifferentiableManifold}:
 \begin{NBin}
 isinstance(M,
-   sage.manifolds.differentiable.manifold.DifferentiableManifold)
+           sage.manifolds.differentiable.manifold.DifferentiableManifold)
 \end{NBin}
 \begin{NBout}
 \texttt{True}
 \end{NBout}
-\jup{ex07.png}
 and hence of
 \code{TopologicalManifold} according to the inheritance diagram of Fig.~\ref{f:man:domain_classes}:
 \begin{NBin}
@@ -146,7 +139,6 @@ isinstance(M, sage.manifolds.manifold.TopologicalManifold)
 \begin{NBout}
 \texttt{True}
 \end{NBout}
-\jup{ex08.png}
 Notice that \code{TopologicalManifold} itself is a subclass of \code{ManifoldSubset} (the class
 for generic subsets of a manifold), which reflects the fact that $M\subset M$.
 
@@ -177,17 +169,15 @@ XU
 \begin{NBout}
 $(U, (x,y))$
 \end{NBout}
-\jup{ex09.png}
 Open subsets of a differentiable manifold are implemented by a (dynamically generated) subclass of
 \code{DifferentiableManifold}, since they are differentiable manifolds in their own:
 \begin{NBin}
 isinstance(U,
-   sage.manifolds.differentiable.manifold.DifferentiableManifold)
+           sage.manifolds.differentiable.manifold.DifferentiableManifold)
 \end{NBin}
 \begin{NBout}
 \texttt{True}
 \end{NBout}
-\jup{ex10.png}
 
 Points on $M$ are created from their coordinates in a given chart:
 \begin{NBin}
@@ -197,7 +187,6 @@ print(p)
 \begin{NBprint}
 Point p on the 2-dimensional differentiable manifold M
 \end{NBprint}
-\jup{ex11.png}
 The syntax \code{U(...)} used to create $p$ as an element of $U$
 reflects the parent/element\index{parent}\index{element} pattern employed in \Sage{}; indeed $U$
 is the parent of $p$:
@@ -207,7 +196,6 @@ p.parent()
 \begin{NBout}
 $U$
 \end{NBout}
-\jup{ex12.png}
 Points are implemented by a dynamically generated subclass of
 \code{ManifoldPoint} (cf.\ Fig.~\ref{f:man:domain_classes}).
 The principal attribute of this class is the one storing the point's coordinates
@@ -222,7 +210,6 @@ p._coordinates
 \begin{NBout}
 $\{(U, (x,y)): (1,2)\}$
 \end{NBout}
-\jup{ex13.png}
 The leading underscore in the name \code{\_coordinates} is a notation
 convention to specify that this attribute is a \defin{private} one:
 the dictionary \code{\_coordinates} should
@@ -240,7 +227,6 @@ XU(p)
 \begin{NBout}
 $(1,2)$
 \end{NBout}
-\jup{ex14.png}
 
 Usually, one needs more than a single coordinate system to cover $\M$.
 An \defin{atlas}\index{atlas} on $\M$ is a set of pairs
@@ -258,7 +244,6 @@ XV
 \begin{NBout}
 $\left( V, (x', y') \right)$
 \end{NBout}
-\jup{ex15.png}
 and declare that $\M$ is covered by only two charts, i.e.\ that $M=U\cup V$:
 \begin{NBin}
 M.declare_union(U, V)
@@ -269,8 +254,6 @@ M.atlas()
 \begin{NBout}
 $\left[ \left(U, (x,y) \right), \left( V, (x', y') \right) \right]$
 \end{NBout}
-\jup{ex16.png}
-\jup{ex17.png}
 
 \subsection{Smooth manifolds}
 
@@ -324,7 +307,6 @@ x' = \frac{x}{x^2+y^2} \\
 y' = \frac{y}{x^2+y^2}
 \end{cases}$
 \end{NBout}
-\jup{ex18.png}
 The argument \code{restrictions1} means that
 $W = U\setminus \{S\}$, where $S$ is the point of coordinates $(x,y)=(0,0)$,
 while the argument \code{restrictions2} means that
@@ -347,7 +329,6 @@ x = \frac{x'}{x'^2+y'^2} \\
 y = \frac{y'}{x'^2+y'^2}
 \end{cases}$
 \end{NBout}
-\jup{ex19.png}
 At this stage, the smooth manifold $M$ is fully specified, being covered by
 one atlas with all transition maps specified. The reader may have recognized that
 $M$ is nothing but the 2-dimensional sphere:
@@ -368,7 +349,6 @@ XV(p)
 $\displaystyle
 \left( \frac{1}{5}, \frac{2}{5} \right)$
 \end{NBout}
-\jup{ex20.png}
 This operation has updated the internal dictionary \code{\_coordinates}
 (compare with \code{Out~[13]}):
 \begin{NBin}
@@ -377,7 +357,6 @@ p._coordinates
 \begin{NBout}
 $\displaystyle \left\{ (U, (x,y)) : (1,2), \left( V, (x', y') \right) : \left( \frac{1}{5}, \frac{2}{5} \right) \right\}$
 \end{NBout}
-\jup{ex21.png}
 
 \subsection{Smooth maps}
 
@@ -402,7 +381,6 @@ XR3
 \begin{NBout}
 $\left( \mathbb{R}^3, (X,Y,Z) \right)$
 \end{NBout}
-\jup{ex22.png}
 The embedding $\Phi: \Sp \to \R^3$ is then defined in terms of its coordinate
 expression in the two charts covering $M=\Sp$:
 \begin{NBin}
@@ -420,7 +398,6 @@ $
 \begin{array}{llcl} \Phi:& M & \longrightarrow & \mathbb{R}^3 \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, x}{x^{2} + y^{2} + 1}, \frac{2 \, y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, {x'}}{{x'}^{2} + {y'}^{2} + 1}, \frac{2 \, {y'}}{{x'}^{2} + {y'}^{2} + 1}, -\frac{{x'}^{2} + {y'}^{2} - 1}{{x'}^{2} + {y'}^{2} + 1}\right) \end{array}
 $
 \end{NBout}
-\jup{ex23.png}
 We may use $\Phi$ for graphical purposes, for instance to display the grids
 of the stereographic charts \code{XU} (in red) and \code{XV} (in green),
 with the point $p$ atop:
@@ -432,7 +409,9 @@ graph = XU.plot(chart=XR3, mapping=Phi, number_values=25,
         p.plot(chart=XR3, mapping=Phi, label_offset=0.05)
 show(graph, viewer='threejs', online=True)
 \end{NBin}
-\jup{ex24.png}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{sphere_stereo.png}
+\end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -473,20 +452,59 @@ devoted to functions of coordinates, allowing for different internal representat
 \Sage{} symbolic expression, \soft{SymPy} expression, etc.
 
 For instance, let us define a scalar field on our example manifold $M=\Sp$:
-\jup{ex25.png}
+\begin{NBin}
+f = M.scalar_field({XU: 1/(1+x^2+y^2), XV: (xp^2+yp^2)/(1+xp^2+yp^2)},
+                   name='f')
+f.display()
+\end{NBin}
+\begin{NBout}
+$
+\begin{array}{llcl} f:& M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \frac{1}{x^{2} + y^{2} + 1} \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \frac{{x'}^{2} + {y'}^{2}}{{x'}^{2} + {y'}^{2} + 1} \end{array}
+$
+\end{NBout}
 The internal dictionary \code{\_express} is then
-\jup{ex26.png}
+\begin{NBin}
+f._express
+\end{NBin}
+\begin{NBout}
+$
+\left\{\left(U,(x, y)\right) : \frac{1}{x^{2} + y^{2} + 1}, \left(V,({x'}, {y'})\right) : \frac{{x'}^{2} + {y'}^{2}}{{x'}^{2} + {y'}^{2} + 1}\right\}
+$
+\end{NBout}
 The reader may wonder about the compatibility of the two coordinate expressions
 provided in the definition of $f$. Actually, to ensure the compatibility, it
 is possible to declare the scalar field in a single chart, \code{XU} say,
 and then to obtain its expression in chart \code{XV} by analytic continuation
 from the expression in $W=U\cap V$, where both expressions are known, thanks
 to the transition map \code{XV}~$\to$~\code{XU}:
-\jup{ex27.png}
+\begin{NBin}
+f0 = M.scalar_field({XU: 1/(1+x^2+y^2)})
+f0.add_expr_by_continuation(XV, U.intersection(V))
+f == f0
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 The representation of the scalar field in a given chart, i.e.\ the public access
 to the private directory \code{\_express}, is obtained via the method \code{coord\_function()}:
-\jup{ex28.png}
-\jup{ex29.png}
+\begin{NBin}
+fU = f.coord_function(XU)
+fU.display()
+\end{NBin}
+\begin{NBout}
+$
+\left(x, y\right) \mapsto \frac{1}{x^{2} + y^{2} + 1}
+$
+\end{NBout}
+\begin{NBin}
+fV = f.coord_function(XV)
+fV.display()
+\end{NBin}
+\begin{NBout}
+$
+\left({x'}, {y'}\right) \mapsto \frac{{x'}^{2} + {y'}^{2}}{{x'}^{2} + {y'}^{2} + 1}
+$
+\end{NBout}
 As mentioned above, each chart representation is an instance of the
 class \code{ChartFunction}:
 \jup{ex30.png}

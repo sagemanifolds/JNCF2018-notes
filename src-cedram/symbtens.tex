@@ -117,9 +117,10 @@
   \end{Verbatim}
   \end{minipage}
   \end{lrbox}
-  \medskip\medskip
-  \par\noindent {\color{inblue} \texttt{In [\theNBin]\!:}}\;\fcolorbox{gray!40}{gray!7}{\usebox{\FVerbBox}}
+%  \medskip\medskip
   \medskip
+  \par\noindent {\color{inblue} \texttt{In [\theNBin]\!:}}\;\fcolorbox{gray!40}{gray!7}{\usebox{\FVerbBox}}
+%  \medskip
 }
 
 % Notebook output
@@ -129,6 +130,7 @@
   \begin{minipage}[t]{5.5in}
 } {
   \end{minipage}
+  \ \\
 }
 
 % Notebook printed output
@@ -137,6 +139,7 @@
 \BVerbatim
 } {
 \endBVerbatim
+\ \\[1ex]
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -222,7 +225,7 @@ Université Paris Sciences et Lettres \\
 
 \maketitle
 
-\setcounter{minitocdepth}{3}
+\setcounter{minitocdepth}{1}
 \dominitoc
 
 \newpage
@@ -231,7 +234,7 @@ Université Paris Sciences et Lettres \\
 
 \tableofcontents
 
-\setcounter{mtc}{0}
+\setcounter{mtc}{1}
 
 \include{int}  % Introduction
 
