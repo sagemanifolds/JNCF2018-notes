@@ -1,0 +1,250 @@
+%
+%  Lecture "Symbolic tensor calculus on manifolds"
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass[12pt,a4paper]{book}
+\documentclass[CCIRM,XML,chapters,Unicode,screen]{cedram}
+%\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+%\usepackage{makeidx} % generation de l'index
+%\usepackage[nottoc]{tocbibind} % bibliographie et index dans la table des matières
+%\usepackage{fancyhdr}
+\usepackage[nohints]{minitoc}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{bm} % bold math
+\usepackage{amsmath}
+\usepackage{amssymb} % symboles AMS (-> \mathbb)
+\usepackage{amsthm}  % theorem-like environments
+\usepackage{mathrsfs} % -> \mathscr
+\usepackage{ifthen}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage[framemethod=TikZ]{mdframed} % -> grey boxes
+\usepackage{fancyvrb} % -> fancy verbatim used to mimic Jupyter notebook input
+
+\usetikzlibrary{calc,positioning,shapes,arrows,chains}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Reglages:
+%
+\hypersetup{pdftitle={Symbolic tensor calculus on manifolds},
+  pdfsubject={tensor calculus},
+  pdfauthor={Eric Gourgoulhon <eric.gourgoulhon@obspm.fr>},
+  pdfkeywords={LaTeX},
+  colorlinks=true
+}
+%\pagestyle{fancyplain}
+%\addtolength{\headwidth}{\marginparsep}
+%\addtolength{\headwidth}{\marginparwidth}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+%\lhead[\fancyplain{}{\bfseries\thepage}]{}
+%\rhead[]{\fancyplain{}{\bfseries\thepage}}
+%\chead[\fancyplain{}{\bfseries\leftmark}]{\fancyplain{}{\bfseries\rightmark}}
+%\cfoot{}
+%
+\setcounter{minitocdepth}{1}
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\arraystretch}{1.4}
+%
+% Hauteur du texte:
+%\setlength{\topmargin}{-1.8cm}  % marge haut = 2.56cm + \topmargin
+%\setlength{\headheight}{1cm}
+%\setlength{\headsep}{0.5cm}
+%\setlength{\textheight}{22.5cm} % hauteur corps texte = \textheight
+%\setlength{\footheight}{2cm}
+%
+% Largeur du texte:
+%\setlength{\textwidth}{16cm}
+%\setlength{\oddsidemargin}{0.cm}
+%\setlength{\evensidemargin}{0.cm}
+%\setlength{\marginparsep}{0.cm}
+%
+% Figures flottantes:
+% fraction maximale d'une page pouvant etre occupe par une figure:
+%\renewcommand{\topfraction}{0.8}
+% fraction minimale d'une page reservee pour le texte:
+%\renewcommand{\textfraction}{0.2}
+% fraction minimale d'occupation de la page par une figure pleine page:
+%\renewcommand{\floatpagefraction}{0.7}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+
+\lstset{language=Python,
+        basicstyle={\footnotesize\ttfamily},
+        numbers=left,
+        numberstyle=\tiny\color{gray},
+        keywordstyle=\color{dkgreen},
+        commentstyle=\color{blue},
+        stringstyle=\color{mauve}
+        }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Notebook styling
+
+\definecolor{inblue}{rgb}{0,0,0.7}
+\definecolor{outred}{rgb}{0.8,0,0.0}
+
+\lstdefinestyle{NBinput}{language=Python,
+        keywordstyle=\bf\color{dkgreen},
+        commentstyle=\color{blue},
+        stringstyle=\color{mauve},
+        morekeywords={False,True},
+        showspaces=false,
+        showstringspaces=false,
+        fancyvrb=true,
+        basewidth=0.5em,
+        basicstyle=\ttfamily,
+        }
+
+% Notebook input
+\newsavebox{\FVerbBox}
+\newcounter{NBin}
+\newenvironment{NBin}{\refstepcounter{NBin}
+  \VerbatimEnvironment
+  \lstset{style=NBinput}
+  \begin{lrbox}{\FVerbBox}
+  \begin{minipage}[t]{5.45in}
+  \begin{Verbatim}
+}{
+  \end{Verbatim}
+  \end{minipage}
+  \end{lrbox}
+  \medskip\medskip
+  \par\noindent {\color{inblue} \texttt{In [\theNBin]\!:}}\;\fcolorbox{gray!40}{gray!7}{\usebox{\FVerbBox}}
+  \medskip
+}
+
+% Notebook output
+\newenvironment{NBout}{
+{
+  \par\noindent \color{outred} \texttt{Out[\theNBin]\!:}}
+  \begin{minipage}[t]{5.5in}
+} {
+  \end{minipage}
+}
+
+% Notebook printed output
+\newenvironment{NBprint}{
+\par\hspace{1cm}
+\BVerbatim
+} {
+\endBVerbatim
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% New commands
+\newcommand{\soft}[1]{\textsf{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\Sage}{\soft{SageMath}}
+\newcommand{\SM}{\soft{SageManifolds}}
+\newcommand{\footurl}[1]{\footnote{\scriptsize\url{#1}}}
+
+\newcommand{\M}{M}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Sp}{\mathbb{S}^2}
+\newcommand{\X}{\mathfrak{X}}
+
+\newcommand{\D}{\mathrm{d}}
+\newcommand{\dd}{\mathbf{d}}
+\newcommand{\w}[1]{\bm{#1}}
+\newcommand{\wpar}{\w{\partial}}
+\newcommand{\wnab}{\w{\nabla}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\encadre}[1]{\fbox{$\displaystyle #1$}}
+\newcommand{\der}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\derd}[2]{\frac{\D #1}{\D #2}}
+\newcommand{\dert}[2]{{\partial #1}/{\partial #2}}
+\newcommand{\Liesymbol}{\mathcal{L}}
+\newcommand{\Lie}[1]{\w{\Liesymbol}_{\w{#1}}\,}
+\newcommand{\Liec}[1]{{\Liesymbol}_{\w{#1}}\,}
+\newcommand{\veps}{\varepsilon}
+
+\newcommand{\defin}[1]{\textbf{\itshape #1}}
+
+\newcounter{remarkCounter}[section]
+\newenvironment{remark}%
+{\refstepcounter{remarkCounter}
+\par\medskip\noindent\small\textbf{Remark \theremarkCounter:}}%
+{\par\medskip}
+
+\newcommand{\jup}[1]{\begin{center}%
+\includegraphics[width=\textwidth]{#1}\end{center}}
+
+%\newmdenv[backgroundcolor=gray!10!white,roundcorner=5pt,hidealllines=true]{greybox}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\makeindex
+
+\begin{document}
+
+\tikzset{
+base/.style={draw, thick, align=center},
+native/.style={base, fill=cyan!30},
+alg/.style={base, fill=red!40, rounded corners},
+diff/.style = {base, fill=yellow!50, rounded corners},
+dict/.style={base, fill=pink!40, draw=red},
+tens/.style = {base, fill=yellow!25, align=left},
+empty/.style={align=left},
+%
+legend/.style = {minimum width=2em, minimum height=1em},
+native_legend/.style = {native, legend},
+alg_legend/.style = {alg, legend},
+diff_legend/.style = {diff, legend},
+%
+line/.style = {->, draw, thick, >=triangle 45}
+}
+
+\title{Symbolic tensor calculus on manifolds}
+\subtitle{A SageMath implementation}
+\author{\firstname{Éric} \lastname{Gourgoulhon}}
+\address{Laboratoire Univers et Théories \\
+CNRS / Observatoire de Paris / Université Paris Diderot\\
+Université Paris Sciences et Lettres \\
+92190 Meudon, France}
+\email{eric.gourgoulhon@obspm.fr}
+\email{marco.mancini@obspm.fr}
+\author{\firstname{Marco} \lastname{Mancini}}
+
+\maketitle
+
+\setcounter{minitocdepth}{3}
+\dominitoc
+
+\newpage
+
+\include{pre}  % Preface
+
+\tableofcontents
+
+\setcounter{mtc}{0}
+
+\include{int}  % Introduction
+
+\include{man}
+
+\include{vec}
+
+\include{ten}
+
+\include{con}
+
+\include{ref}
+
+%\printindex
+
+\end{document}
