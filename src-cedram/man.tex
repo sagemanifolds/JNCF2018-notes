@@ -61,9 +61,9 @@ By default, the function \code{Manifold} returns a manifold over $\K=\R$:
 \begin{NBin}
 M.base_field()
 \end{NBin}
-\begin{NBout}
-$\mathbf{R}$
-\end{NBout}
+\begin{NBoutM}
+\mathbf{R}
+\end{NBoutM}
 Note the use of the standard object-oriented notation (ubiquitous in
 \soft{Python}): the method \code{base\_field()} is called on the object \code{M};
 since this method does not require any extra argument (all the information lies
@@ -166,9 +166,9 @@ U = M.open_subset('U')
 XU.<x,y> = U.chart()
 XU
 \end{NBin}
-\begin{NBout}
-$(U, (x,y))$
-\end{NBout}
+\begin{NBoutM}
+(U, (x,y))
+\end{NBoutM}
 Open subsets of a differentiable manifold are implemented by a (dynamically generated) subclass of
 \code{DifferentiableManifold}, since they are differentiable manifolds in their own:
 \begin{NBin}
@@ -193,9 +193,9 @@ is the parent of $p$:
 \begin{NBin}
 p.parent()
 \end{NBin}
-\begin{NBout}
-$U$
-\end{NBout}
+\begin{NBoutM}
+U
+\end{NBoutM}
 Points are implemented by a dynamically generated subclass of
 \code{ManifoldPoint} (cf.\ Fig.~\ref{f:man:domain_classes}).
 The principal attribute of this class is the one storing the point's coordinates
@@ -207,9 +207,9 @@ key to access to an element is not restricted to an integer or a tuple of intege
 \begin{NBin}
 p._coordinates
 \end{NBin}
-\begin{NBout}
-$\{(U, (x,y)): (1,2)\}$
-\end{NBout}
+\begin{NBoutM}
+\{(U, (x,y)): (1,2)\}
+\end{NBoutM}
 The leading underscore in the name \code{\_coordinates} is a notation
 convention to specify that this attribute is a \defin{private} one:
 the dictionary \code{\_coordinates} should
@@ -224,9 +224,9 @@ the point (reflecting thereby the definition~\eqref{e:man:def_chart} of a chart)
 \begin{NBin}
 XU(p)
 \end{NBin}
-\begin{NBout}
-$(1,2)$
-\end{NBout}
+\begin{NBoutM}
+(1,2)
+\end{NBoutM}
 
 Usually, one needs more than a single coordinate system to cover $\M$.
 An \defin{atlas}\index{atlas} on $\M$ is a set of pairs
@@ -241,9 +241,9 @@ V = M.open_subset('V')
 XV.<xp,yp> = V.chart("xp:x' yp:y'")
 XV
 \end{NBin}
-\begin{NBout}
-$\left( V, (x', y') \right)$
-\end{NBout}
+\begin{NBoutM}
+\left( V, (x', y') \right)
+\end{NBoutM}
 and declare that $\M$ is covered by only two charts, i.e.\ that $M=U\cup V$:
 \begin{NBin}
 M.declare_union(U, V)
@@ -251,9 +251,9 @@ M.declare_union(U, V)
 \begin{NBin}
 M.atlas()
 \end{NBin}
-\begin{NBout}
-$\left[ \left(U, (x,y) \right), \left( V, (x', y') \right) \right]$
-\end{NBout}
+\begin{NBoutM}
+\left[ \left(U, (x,y) \right), \left( V, (x', y') \right) \right]
+\end{NBoutM}
 
 \subsection{Smooth manifolds}
 
@@ -300,13 +300,12 @@ XU_to_XV = XU.transition_map(XV,
                              restrictions2= xp^2+yp^2!=0)
 XU_to_XV.display()
 \end{NBin}
-\begin{NBout}
-$\displaystyle
+\begin{NBoutM}
 \begin{cases}
 x' = \frac{x}{x^2+y^2} \\
 y' = \frac{y}{x^2+y^2}
-\end{cases}$
-\end{NBout}
+\end{cases}
+\end{NBoutM}
 The argument \code{restrictions1} means that
 $W = U\setminus \{S\}$, where $S$ is the point of coordinates $(x,y)=(0,0)$,
 while the argument \code{restrictions2} means that
@@ -322,13 +321,12 @@ of the one defined above:
 \begin{NBin}
 XU_to_XV.inverse().display()
 \end{NBin}
-\begin{NBout}
-$\displaystyle
+\begin{NBoutM}
 \begin{cases}
 x = \frac{x'}{x'^2+y'^2} \\
 y = \frac{y'}{x'^2+y'^2}
-\end{cases}$
-\end{NBout}
+\end{cases}
+\end{NBoutM}
 At this stage, the smooth manifold $M$ is fully specified, being covered by
 one atlas with all transition maps specified. The reader may have recognized that
 $M$ is nothing but the 2-dimensional sphere:
@@ -345,18 +343,17 @@ coordinates were $(1,2)$:
 \begin{NBin}
 XV(p)
 \end{NBin}
-\begin{NBout}
-$\displaystyle
-\left( \frac{1}{5}, \frac{2}{5} \right)$
-\end{NBout}
+\begin{NBoutM}
+\left( \frac{1}{5}, \frac{2}{5} \right)
+\end{NBoutM}
 This operation has updated the internal dictionary \code{\_coordinates}
 (compare with \code{Out~[13]}):
 \begin{NBin}
 p._coordinates
 \end{NBin}
-\begin{NBout}
-$\displaystyle \left\{ (U, (x,y)) : (1,2), \left( V, (x', y') \right) : \left( \frac{1}{5}, \frac{2}{5} \right) \right\}$
-\end{NBout}
+\begin{NBoutM}
+\left\{ (U, (x,y)) : (1,2), \left( V, (x', y') \right) : \left( \frac{1}{5}, \frac{2}{5} \right) \right\}
+\end{NBoutM}
 
 \subsection{Smooth maps}
 
@@ -378,9 +375,9 @@ R3 = Manifold(3, 'R^3', r'\mathbb{R}^3')
 XR3.<X,Y,Z> = R3.chart()
 XR3
 \end{NBin}
-\begin{NBout}
-$\left( \mathbb{R}^3, (X,Y,Z) \right)$
-\end{NBout}
+\begin{NBoutM}
+\left( \mathbb{R}^3, (X,Y,Z) \right)
+\end{NBoutM}
 The embedding $\Phi: \Sp \to \R^3$ is then defined in terms of its coordinate
 expression in the two charts covering $M=\Sp$:
 \begin{NBin}
@@ -393,11 +390,9 @@ Phi = M.diff_map(R3, {(XU, XR3):
                  name='Phi', latex_name=r'\Phi')
 Phi.display()
 \end{NBin}
-\begin{NBout}
-$
+\begin{NBoutM}
 \begin{array}{llcl} \Phi:& M & \longrightarrow & \mathbb{R}^3 \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, x}{x^{2} + y^{2} + 1}, \frac{2 \, y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, {x'}}{{x'}^{2} + {y'}^{2} + 1}, \frac{2 \, {y'}}{{x'}^{2} + {y'}^{2} + 1}, -\frac{{x'}^{2} + {y'}^{2} - 1}{{x'}^{2} + {y'}^{2} + 1}\right) \end{array}
-$
-\end{NBout}
+\end{NBoutM}
 We may use $\Phi$ for graphical purposes, for instance to display the grids
 of the stereographic charts \code{XU} (in red) and \code{XV} (in green),
 with the point $p$ atop:
@@ -457,20 +452,16 @@ f = M.scalar_field({XU: 1/(1+x^2+y^2), XV: (xp^2+yp^2)/(1+xp^2+yp^2)},
                    name='f')
 f.display()
 \end{NBin}
-\begin{NBout}
-$
+\begin{NBoutM}
 \begin{array}{llcl} f:& M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \frac{1}{x^{2} + y^{2} + 1} \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \frac{{x'}^{2} + {y'}^{2}}{{x'}^{2} + {y'}^{2} + 1} \end{array}
-$
-\end{NBout}
+\end{NBoutM}
 The internal dictionary \code{\_express} is then
 \begin{NBin}
 f._express
 \end{NBin}
-\begin{NBout}
-$
+\begin{NBoutM}
 \left\{\left(U,(x, y)\right) : \frac{1}{x^{2} + y^{2} + 1}, \left(V,({x'}, {y'})\right) : \frac{{x'}^{2} + {y'}^{2}}{{x'}^{2} + {y'}^{2} + 1}\right\}
-$
-\end{NBout}
+\end{NBoutM}
 The reader may wonder about the compatibility of the two coordinate expressions
 provided in the definition of $f$. Actually, to ensure the compatibility, it
 is possible to declare the scalar field in a single chart, \code{XU} say,
@@ -491,32 +482,48 @@ to the private directory \code{\_express}, is obtained via the method \code{coor
 fU = f.coord_function(XU)
 fU.display()
 \end{NBin}
-\begin{NBout}
-$
+\begin{NBoutM}
 \left(x, y\right) \mapsto \frac{1}{x^{2} + y^{2} + 1}
-$
-\end{NBout}
+\end{NBoutM}
 \begin{NBin}
 fV = f.coord_function(XV)
 fV.display()
 \end{NBin}
-\begin{NBout}
-$
+\begin{NBoutM}
 \left({x'}, {y'}\right) \mapsto \frac{{x'}^{2} + {y'}^{2}}{{x'}^{2} + {y'}^{2} + 1}
-$
-\end{NBout}
+\end{NBoutM}
 As mentioned above, each chart representation is an instance of the
 class \code{ChartFunction}:
-\jup{ex30.png}
+\begin{NBin}
+isinstance(fU, sage.manifolds.chart_func.ChartFunction)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 Mathematically, \defin{chart functions}\index{chart!function} are $\K$-valued functions on the codomain of
 the considered chart. They map coordinates to elements of the base field $\K$:
-\jup{ex31.png}
-\jup{ex32.png}
+\begin{NBin}
+fU(1,2)
+\end{NBin}
+\begin{NBoutM}
+\frac{1}{6}
+\end{NBoutM}
+\begin{NBin}
+fU(*XU(p))
+\end{NBin}
+\begin{NBoutM}
+\frac{1}{6}
+\end{NBoutM}
 Note the use of Python's star operator in \code{*XU(p)} to unpack the tuple of coordinates
 returned by \code{XU(p)} (in the present case: \code{(1,2)}) to positional arguments
 for the function \code{fU} (in the present case: \code{1, 2}).
 On their side, scalar fields map \emph{manifold points}, not coordinates, to $\K$:
-\jup{ex33.png}
+\begin{NBin}
+f(p)
+\end{NBin}
+\begin{NBoutM}
+\frac{1}{6}
+\end{NBoutM}
 Note that the equality between \code{Out[32]} and \code{Out[33]}
 reflects the identity $f = F \circ X$, where $F$ is the chart function
 (denoted \code{fU} above)
@@ -539,31 +546,87 @@ whose keys are strings identifying the computational engines. By default
 only \Sage{} symbolic expressions, i.e.\ expressions pertaining
 to the so-called \Sage{}'s Symbolic Ring (\code{SR}),
 are stored:
-\jup{ex34.png}
+\begin{NBin}
+fU._express
+\end{NBin}
+\begin{NBoutM}
+\left\{\verb|SR| : \frac{1}{x^{2} + y^{2} + 1}\right\}
+\end{NBoutM}
 The public access to the private dictionary \code{\_express} is performed via the
 method \code{expr()}:
-\jup{ex35.png}
-\jup{ex36.png}
+\begin{NBin}
+fU.expr()
+\end{NBin}
+\begin{NBoutM}
+\frac{1}{x^{2} + y^{2} + 1}
+\end{NBoutM}
+\begin{NBin}
+type(fU.expr())
+\end{NBin}
+\begin{NBout}
+\begin{verbatim}
+<type 'sage.symbolic.expression.Expression'>
+\end{verbatim}
+\end{NBout}
 Actually, \code{fU.expr()} is a shortcut for \code{fU.expr('SR')} since
 \code{SR} is the default symbolic engine. Note that the class
 \code{Expression} is that devoted to \Sage{} symbolic expressions.
 The method \code{expr()} can also be invoked to get the expression in
 another symbolic engine, for instance \soft{SymPy}:
-\jup{ex37.png}
-\jup{ex38.png}
+\begin{NBin}
+fU.expr('sympy')
+\end{NBin}
+\begin{NBout}
+\verb|1/(x**2|\phantom{\verb!x!}\verb|+|\phantom{\verb!x!}\verb|y**2|\phantom{\verb!x!}\verb|+|\phantom{\verb!x!}\verb|1)|
+\end{NBout}
+\begin{NBin}
+type(fU.expr('sympy'))
+\end{NBin}
+\begin{NBout}
+\begin{verbatim}
+<class 'sympy.core.power.Pow'>
+\end{verbatim}
+\end{NBout}
 This operation has updated the internal dictionary \code{\_express}
 (compare with \code{Out~[34]}):
-\jup{ex39.png}
+\begin{NBin}
+fU._express
+\end{NBin}
+\begin{NBoutM}
+\left\{\texttt{SR} : \frac{1}{x^{2} + y^{2} + 1},
+\texttt{sympy}: \mbox{\texttt{1/(x**2 + y**2 + 1)}}\right\}
+\end{NBoutM}
 The default calculus engine for chart functions of chart \code{XU} can
 changed thanks to the method \code{set\_calculus\_method()}:
-\jup{ex40.png}
+\begin{NBin}
+XU.set_calculus_method('sympy')
+fU.expr()
+\end{NBin}
+\begin{NBout}
+\verb|1/(x**2|\phantom{\verb!x!}\verb|+|\phantom{\verb!x!}\verb|y**2|\phantom{\verb!x!}\verb|+|\phantom{\verb!x!}\verb|1)|
+\end{NBout}
 Reverting to \Sage{}'s symbolic engine:
-\jup{ex41.png}
-
+\begin{NBin}
+XU.set_calculus_method('SR')
+fU.expr()
+\end{NBin}
+\begin{NBoutM}
+\frac{1}{x^{2} + y^{2} + 1}
+\end{NBoutM}
 Symbolic expressions can be accessed directly from the scalar field,
 \code{f.expr(XU)} being a shortcut for \code{f.coord\_function(XU).expr()}:
-\jup{ex42.png}
-\jup{ex43.png}
+\begin{NBin}
+f.expr(XU)
+\end{NBin}
+\begin{NBoutM}
+\frac{1}{x^{2} + y^{2} + 1}
+\end{NBoutM}
+\begin{NBin}
+f.expr(XV)
+\end{NBin}
+\begin{NBoutM}
+\frac{{x'}^{2} + {y'}^{2}}{{x'}^{2} + {y'}^{2} + 1}
+\end{NBoutM}
 
 \begin{figure}
 \begin{center}
@@ -591,19 +654,45 @@ is of course \code{DiffScalarField} (cf.\ Fig.~\ref{f:man:scalar_classes}).
 
 The \Sage{} object representing $C^\infty(M)$ is obtained from \code{M} via the
 method\\ \code{scalar\_field\_algebra()}:
-\jup{ex44.png}
-\jup{ex45.png}
+\begin{NBin}
+CM = M.scalar_field_algebra()
+CM
+\end{NBin}
+\begin{NBoutM}
+C^{\infty}\left(M\right)
+\end{NBoutM}
+\begin{NBin}
+CM.category()
+\end{NBin}
+\begin{NBoutM}
+\mathbf{CommutativeAlgebras}_{\text{SR}}
+\end{NBoutM}
 As for the manifold classes, the actual Python class implementing
 $C^\infty(M)$ is inherited from \code{DiffScalarFieldAlgebra} via \Sage{}'s
-category framework (cf.\ Sec.~\ref{s:bas:def_manif}), hence it bares the name \code{DiffScalarFieldAlgebra-with-category}:
-\jup{ex46.png}
-The class \code{DiffScalarFieldAlgebra-with-category} is dynamically generated
+category framework (cf.\ Sec.~\ref{s:bas:def_manif}), hence it bares the name \code{DiffScalarFieldAlgebra\_with\_category}:
+\begin{NBin}
+type(CM)
+\end{NBin}
+\begin{NBout}
+\begin{verbatim}
+<class
+'sage.manifolds.differentiable.scalarfield_algebra.DiffScalarFieldAlgebra_with_category'>
+\end{verbatim}
+\end{NBout}
+The class \code{DiffScalarFieldAlgebra\_with\_category} is dynamically generated
 as a subclass of \code{DiffScalarFieldAlgebra} with extra functionalities, like
 for instance the method \code{is\_commutative()}:
-\jup{ex47.png}
+\begin{NBin}
+CM.is_commutative()
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 To have a look at the corresponding code,
 we use the double question mark, owing to the fact that \Sage{} is open-source:
-\jup{ex48.png}
+\begin{NBin}
+CM.is_commutative??
+\end{NBin}
 \begin{lstlisting}
 def is_commutative(self):
     """
@@ -625,19 +714,50 @@ dynamically generating the class  \code{DiffScalarFieldAlgebra-with-category}.
 
 Regarding the scalar field \code{f} introduced in Sec.~\ref{s:man:def_scalar}, we
 have of course
-\jup{ex49.png}
+\begin{NBin}
+f in CM
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 Actually, in \Sage{} language, \code{CM}=$C^\infty(M)$ is the parent of \code{f}:
-\jup{ex50.png}
+\begin{NBin}
+f.parent() is CM
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 The zero element of the algebra $C^\infty(M)$ is
-\jup{ex51.png}
+\begin{NBin}
+CM.zero().display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} 0:& M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & 0 \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & 0 \end{array}
+\end{NBoutM}
 while its unit element is
-\jup{ex52.png}
+\begin{NBin}
+CM.one().display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} 1:& M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & 1 \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & 1 \end{array}
+\end{NBoutM}
 
 \subsection{Implementation of algebra operations} \label{s:man:add_implement}
 
 Let us consider some operation in the algebra $C^\infty(M)$:
-\jup{ex53.png}
-\jup{ex54.png}
+\begin{NBin}
+h = f + 2*CM.one()
+h.display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} & M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \frac{2 \, x^{2} + 2 \, y^{2} + 3}{x^{2} + y^{2} + 1} \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \frac{3 \, {x'}^{2} + 3 \, {y'}^{2} + 2}{{x'}^{2} + {y'}^{2} + 1} \end{array}
+\end{NBoutM}
+\begin{NBin}
+h(p)
+\end{NBin}
+\begin{NBoutM}
+\frac{13}{6}
+\end{NBoutM}
 Let us examine how the addition in \code{In~[53]} is performed. For the Python interpreter
 \code{h = f + 2*CM.one()} is equivalent to \code{h = f.\_\_add\_\_(2*CM.one())},
 i.e.\ the \code{+} operator amounts to calling the method \code{\_\_add\_\_()} on its
@@ -646,7 +766,9 @@ To have a look at the source code of this method, we use the double question mar
 transcript of code and in those that follow, some parts
 have been skipped, being not relevant for the discussion; they are marked
 by ``\code{...}''.}
-\jup{ex55.png}
+\begin{NBin}
+f.__add__??
+\end{NBin}
 \label{p:man:list___add__}
 \begin{lstlisting}
 File: .../src/sage/structure/element.pyx
@@ -675,7 +797,9 @@ have the same parent, namely the algebra \code{CM}, so that the actual
 result is computed in line~12. The latter invokes the method \code{\_add\_()}
 (note the single underscore on each side of \code{add}). This operator is
 implemented at the level of \code{ScalarField}, as checked from the source code (see line~24 below):
-\jup{ex56.png}
+\begin{NBin}
+f._add_??
+\end{NBin}
 \begin{lstlisting}
 def _add_(self, other):
     """
@@ -712,12 +836,19 @@ Looking at the code (lines~15 to 23), we notice that the first step is to search
 for the charts in which both operands of the addition operator have a coordinate
 expression (line~15). This is performed by the method \code{common\_charts()};
 in the current example, we get the two stereographic charts defined on $M$:
-\jup{ex57.png}
+\begin{NBin}
+f.common_charts(2*CM.one())
+\end{NBin}
+\begin{NBoutM}
+\left[\left(U,(x, y)\right), \left(V,({x'}, {y'})\right)\right]
+\end{NBoutM}
 In general, \code{common\_charts()} returns the charts for which both operands
 have already a known coordinate expression or for which a coordinate
 expression can be computed by a known transition map, as we can see on the source
 code:
-\jup{ex58.png}
+\begin{NBin}
+f.common_charts??
+\end{NBin}
 \begin{lstlisting}
 def common_charts(self, other):
     """
@@ -781,7 +912,9 @@ the addition is performed at the chart function level (cf.\ Sec.~\ref{s:man:def_
 via the loop on the charts in lines~19-21 of the code for \code{\_add\_()}.
 The code for the addition of chart functions defined on the same chart
 is (recall that \code{fU} is the chart function representing $f$ in chart \code{XU}):
-\jup{ex59.png}
+\begin{NBin}
+fU._add_??
+\end{NBin}
 \begin{lstlisting}
 def _add_(self, other):
     """
@@ -822,13 +955,34 @@ Let us now discuss the second case in the \code{\_\_add\_\_()} method of
 \code{Element}, namely the case for which the parents of both operands are
 different (lines~14-15 in the code listed as a result of \code{In [55]},
 on page~\pageref{p:man:list___add__}). This case is treated via \Sage{} coercion\index{coercion} model, which allows one to deal with additions like
-\jup{ex60.png}
+\begin{NBin}
+h1 = f + 2
+h1.display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} & M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \frac{2 \, x^{2} + 2 \, y^{2} + 3}{x^{2} + y^{2} + 1} \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \frac{3 \, {x'}^{2} + 3 \, {y'}^{2} + 2}{{x'}^{2} + {y'}^{2} + 1} \end{array}
+\end{NBoutM}
 A priori, \code{f + 2} is not a well defined operation, since the integer $2$ does not
 belong to the algebra $C^\infty(M)$. However \Sage{} manages to treat it
 because $2$ can be coerced (i.e.\ automatically and unambiguously converted) via \code{CM(2)}
 into a element of $C^\infty(M)$, namely the constant scalar field whose value is $2$:
-\jup{ex61.png}
+\begin{NBin}
+CM(2).display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} & M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & 2 \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & 2 \end{array}
+\end{NBoutM}
 This happens because there exists a coercion map from the parent of $2$, namely the ring of integers $\mathbb{Z}$
 (denoted \code{ZZ} in \Sage{}), to $C^\infty(M)$:
-\jup{ex62.png}
-\jup{ex63.png}
+\begin{NBin}
+2.parent()
+\end{NBin}
+\begin{NBoutM}
+\mathbf{Z}
+\end{NBoutM}
+\begin{NBin}
+CM.has_coerce_map_from(ZZ)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}

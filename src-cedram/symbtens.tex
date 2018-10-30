@@ -133,6 +133,18 @@
   \ \\
 }
 
+% Notebook output (math format)
+\newenvironment{NBoutM}{
+{
+  \par\noindent \color{outred} \texttt{Out[\theNBin]\!:}}
+  \begin{minipage}[t]{5.5in}
+  $\displaystyle
+} {
+  $
+  \end{minipage}
+  \ \\
+}
+
 % Notebook printed output
 \newenvironment{NBprint}{
 \par\hspace{1cm}

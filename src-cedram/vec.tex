@@ -40,8 +40,28 @@ we recreate the same objects as in Chap.~\ref{s:man}, starting with the manifold
 $M$ and its two stereographic charts $X_U = (U,(x,y))$ and $X_V = (V,(x',y'))$,
 with $M=U\cup V$ (the full Jupyter notebook is available at
 \url{http://sagemanifolds.obspm.fr/jncf2018/}):
-\jup{ve01.png}
-\jup{ve02.png}
+\setcounter{NBin}{0}
+\begin{NBin}
+%display latex
+\end{NBin}
+\begin{NBin}
+M = Manifold(2, 'M')
+U = M.open_subset('U')
+XU.<x,y> = U.chart()
+V = M.open_subset('V')
+XV.<xp,yp> = V.chart("xp:x' yp:y'")
+M.declare_union(U,V)
+XU_to_XV = XU.transition_map(XV,
+                             (x/(x^2+y^2), y/(x^2+y^2)),
+                             intersection_name='W',
+                             restrictions1= x^2+y^2!=0,
+                             restrictions2= xp^2+yp^2!=0)
+XV_to_XU = XU_to_XV.inverse()
+M.atlas()
+\end{NBin}
+\begin{NBoutM}
+\left[\left(U,(x, y)\right), \left(V,({x'}, {y'})\right), \left(W,(x, y)\right), \left(W,({x'}, {y'})\right)\right]
+\end{NBoutM}
 Then we introduce the point $p\in U$ of coordinates $(x,y)=(1,2)$:
 \jup{ve03.png}
 The canonical embedding of $\Sp$ in $\R^3$ is defined mostly for
