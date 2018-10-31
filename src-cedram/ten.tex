@@ -14,132 +14,439 @@ Let us continue with the same example notebook as that considered in
 Chap.~\ref{s:vec}. There, we had introduced $f$ as a scalar field on
 the 2-dimensional manifold $M = \mathbb{S}^2$ (cf.\ Sec.~\ref{s:vec:tangent_impl}).
 The differential of $f$ is a 1-form on $M$:
-\jup{te80.png}
-\jup{te81.png}
+\begin{NBin}
+df = f.differential()
+df
+\end{NBin}
+\begin{NBoutM}
+\mathrm{d}f
+\end{NBoutM}
+\begin{NBin}
+print(df)
+\end{NBin}
+\begin{NBprint}
+1-form df on the 2-dimensional differentiable manifold M
+\end{NBprint}
 A 1-form is actually a tensor field of type $(0,1)$:
-\jup{te82.png}
+\begin{NBin}
+df.tensor_type()
+\end{NBin}
+\begin{NBoutM}
+\left(0, 1\right)
+\end{NBoutM}
 while a vector field is a tensor field of type $(1,0)$:
-\jup{te83.png}
+\begin{NBin}
+v.tensor_type()
+\end{NBin}
+\begin{NBoutM}
+\left(1, 0\right)
+\end{NBoutM}
 Specific 1-forms are those forming the dual basis (coframe) of a given vector
 frame: for instance for the vector frame \code{eU} = $(\dert{}{x},\dert{}{y})$
 on $U$, considered as a basis of the free $C^\infty(U)$-module $\mathfrak{X}(U)$,
 we have:
-\jup{te84.png}
-\jup{te85.png}
+\begin{NBin}
+eU.dual_basis()
+\end{NBin}
+\begin{NBoutM}
+\left(U, \left(\mathrm{d} x,\mathrm{d} y\right)\right)
+\end{NBoutM}
+\begin{NBin}
+print(eU.dual_basis()[0])
+\end{NBin}
+\begin{NBprint}
+1-form dx on the Open subset U of the 2-dimensional differentiable manifold M
+\end{NBprint}
 Since \code{eU} is the default frame on $M$, the default display of $\mathrm{d}f$
 is performed in terms of \code{eU}'s coframe:
-\jup{te86.png}
+\begin{NBin}
+df.display()
+\end{NBin}
+\begin{NBoutM}
+\mathrm{d}f = \left( -\frac{2 \, x}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \mathrm{d} x + \left( -\frac{2 \, y}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \mathrm{d} y
+\end{NBoutM}
 We may check that in this basis, the components of $\left. \mathrm{d}f \right| _U$
 are nothing but the partial derivatives of the coordinate expression of $f$
 with respect to coordinates $(x,y)$:
-\jup{te87.png}
-\jup{te88.png}
+\begin{NBin}
+df[0] == diff(f.expr(), x)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
+\begin{NBin}
+df[1] == diff(f.expr(), y)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 In the coframe associated with \code{eV} = $(\dert{}{x'},\dert{}{y'})$:
-\jup{te89.png}
+\begin{NBin}
+df.display(eV)
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+\mathrm{d}f = \left( \frac{2 \, {x'}}{{x'}^{4} + {y'}^{4} + 2 \, {\left({x'}^{2} + 1\right)} {y'}^{2} + 2 \, {x'}^{2} + 1} \right) \mathrm{d} {x'} $\\
+$\displaystyle
++ \left( \frac{2 \, {y'}}{{x'}^{4} + {y'}^{4} + 2 \, {\left({x'}^{2} + 1\right)} {y'}^{2} + 2 \, {x'}^{2} + 1} \right) \mathrm{d} {y'}$
+\end{NBout}
 Since \code{eV} is not the default vector frame on $M$ and \code{XV} = $(V,(x',y'))$
 is not the default chart on $M$, we get the individual components by
 specifying both \code{eV} and \code{XV}, in addition to the index, in the
 square-bracket operator:
-\jup{te90.png}
+\begin{NBin}
+df[eV,0,XV]
+\end{NBin}
+\begin{NBoutM}
+\frac{2 \, {x'}}{{x'}^{4} + {y'}^{4} + 2 \, {\left({x'}^{2} + 1\right)} {y'}^{2} + 2 \, {x'}^{2} + 1}
+\end{NBoutM}
 We may then check that the components in the frame \code{eV}
 are the partial derivatives with respect to the coordinates \code{xp} = $x'$ and
 \code{yp} = $y'$ of the chart \code{XV}:
-\jup{te91.png}
-\jup{te92.png}
+\begin{NBin}
+df[eV,0,XV] == diff(f.expr(XV), xp)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
+\begin{NBin}
+df[eV,1,XV] == diff(f.expr(XV), yp)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 The parent of $\mathrm{d}f$ is the set $\Omega^1(M)$ of all 1-forms on $M$,
 considered as a $C^\infty(M)$-module:
-\jup{te93.png}
-\jup{te94.png}
+\begin{NBin}
+print(df.parent())
+df.parent()
+\end{NBin}
+\begin{NBprint}
+Module Omega^1(M) of 1-forms on the 2-dimensional differentiable manifold M
+\end{NBprint}
+\begin{NBoutM}
+\Omega^{1}\left(M\right)
+\end{NBoutM}
+\begin{NBin}
+df.parent().base_ring()
+\end{NBin}
+\begin{NBoutM}
+C^{\infty}\left(M\right)
+\end{NBoutM}
 This module is actually the dual of the vector-field module $\mathfrak{X}(M)$,
 which is represented
 by the Python object \code{YM} (cf.\ Sec.~\ref{s:vec:vector_field_impl}):
-\jup{te95.png}
+\begin{NBin}
+YM.dual()
+\end{NBin}
+\begin{NBoutM}
+\Omega^{1}\left(M\right)
+\end{NBoutM}
 Consequently, a 1-form acts on vector fields, yielding an element of
 $C^\infty(M)$, i.e.\ a scalar field:
-\jup{te96.png}
+\begin{NBin}
+print(df(v))
+\end{NBin}
+\begin{NBprint}
+Scalar field df(v) on the 2-dimensional differentiable manifold M
+\end{NBprint}
 This scalar field is nothing but the result of the action of $\w{v}$ on $f$
 discussed in Sec.~\ref{s:vec:action_on_scalar}:
-\jup{te97.png}
+\begin{NBin}
+df(v) == v(f)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 
 \section{More general tensor fields}
 
 We construct a tensor of type $(1,1)$ by taking the tensor product
 $\w{v}\otimes \mathrm{d}f$:
-\jup{te98.png}
-\jup{te99.png}
-\jup{te100.png}
+\begin{NBin}
+t = v * df
+t
+\end{NBin}
+\begin{NBoutM}
+\mbox{Tensor field of type (1,1) on the 2-dimensional differentiable manifold M}
+\end{NBoutM}
+\begin{NBin}
+t.display()
+\end{NBin}
+\begin{NBoutM}
+v\otimes \mathrm{d}f = \left( -\frac{2 \, x}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} x + \left( -\frac{2 \, y}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} y + \left( \frac{4 \, x}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} x + \left( \frac{4 \, y}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} y
+\end{NBoutM}
+\begin{NBin}
+t.display(eV)
+\end{NBin}
+\begin{NBoutM}
+v\otimes \mathrm{d}f = \left( -\frac{2 \, {\left({x'}^{5} - 4 \, {x'}^{2} {y'}^{3} - {x'} {y'}^{4} - 4 \, {\left({x'}^{4} + {x'}^{2}\right)} {y'}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {x'} }\otimes \mathrm{d} {x'} + \left( -\frac{2 \, {\left({x'}^{4} {y'} - 4 \, {x'} {y'}^{4} - {y'}^{5} - 4 \, {\left({x'}^{3} + {x'}\right)} {y'}^{2}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {x'} }\otimes \mathrm{d} {y'} + \left( -\frac{4 \, {\left({x'}^{5} + {x'}^{4} {y'} + {x'}^{2} {y'}^{3} - {x'} {y'}^{4} + {x'}^{3} - {x'} {y'}^{2}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {y'} }\otimes \mathrm{d} {x'} + \left( -\frac{4 \, {\left({x'}^{3} {y'}^{2} + {x'} {y'}^{4} - {y'}^{5} - {y'}^{3} + {\left({x'}^{4} + {x'}^{2}\right)} {y'}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {y'} }\otimes \mathrm{d} {y'}
+\end{NBoutM}
 We can use the method \code{display\_comp()} for a display component by
 component:
-\jup{te101.png}
+\begin{NBin}
+t.display_comp()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{lcl} v\otimes \mathrm{d}f_{ \phantom{\, x} \, x }^{ \, x \phantom{\, x} } & = & -\frac{2 \, x}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \\ v\otimes \mathrm{d}f_{ \phantom{\, x} \, y }^{ \, x \phantom{\, y} } & = & -\frac{2 \, y}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \\ v\otimes \mathrm{d}f_{ \phantom{\, y} \, x }^{ \, y \phantom{\, x} } & = & \frac{4 \, x}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \\ v\otimes \mathrm{d}f_{ \phantom{\, y} \, y }^{ \, y \phantom{\, y} } & = & \frac{4 \, y}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \end{array}
+\end{NBoutM}
 The parent of $t$ is the set $\mathcal{T}^{(1,1)}(M)$ of all type-$(1,1)$
 tensor fields on $M$,
 considered as a $C^\infty(M)$-module:
-\jup{te102.png}
-\jup{te103.png}
+\begin{NBin}
+print(t.parent())
+t.parent()
+\end{NBin}
+\begin{NBprint}
+Module T^(1,1)(M) of type-(1,1) tensors fields on the 2-dimensional
+differentiable manifold M
+\end{NBprint}
+\begin{NBoutM}
+\mathcal{T}^{(1,1)}\left(M\right)
+\end{NBoutM}
+\begin{NBin}
+t.parent().base_ring()
+\end{NBin}
+\begin{NBoutM}
+C^{\infty}\left(M\right)
+\end{NBoutM}
+
 As for vector fields, since $M$ is not parallelizable, the $C^\infty(M)$-module
 $\mathcal{T}^{(1,1)}(M)$ is not free and the tensor fields are described by
 their restrictions to parallelizable subdomains:
-\jup{te104.png}
+\begin{NBin}
+t._restrictions
+\end{NBin}
+\begin{NBoutM}
+\left\{V : v\otimes \mathrm{d}f, U : v\otimes \mathrm{d}f\right\}
+\end{NBoutM}
 These restrictions form free modules:
-\jup{te105.png}
-\jup{te106.png}
+\begin{NBin}
+print(t._restrictions[U].parent())
+\end{NBin}
+\begin{NBprint}
+Free module T^(1,1)(U) of type-(1,1) tensors fields on the Open subset U of
+the 2-dimensional differentiable manifold M
+\end{NBprint}
+\begin{NBin}
+t._restrictions[U].parent().base_ring()
+\end{NBin}
+\begin{NBoutM}
+C^{\infty}\left(U\right)
+\end{NBoutM}
+
 
 \section{Riemannian metric}
 
 \subsection{Defining a metric}
 
 The standard metric on $M=\mathbb{S}^2$ is that induced by the Euclidean metric of $\mathbb{R}^3$. Let us start by defining the latter:
-\jup{te107.png}
+\begin{NBin}
+h = R3.metric('h')
+h[0,0], h[1,1], h[2, 2] = 1, 1, 1
+h.display()
+\end{NBin}
+\begin{NBoutM}
+h = \mathrm{d} X\otimes \mathrm{d} X+\mathrm{d} Y\otimes \mathrm{d} Y+\mathrm{d} Z\otimes \mathrm{d} Z
+\end{NBoutM}
 The metric $g$ on $M$ is the pullback of $h$ associated with the embedding $\Phi$
 introduced in Sec.~\ref{s:vec:tangent_impl}:
-\jup{te108.png}
+\begin{NBin}
+g = M.metric('g')
+g.set( Phi.pullback(h) )
+print(g)
+\end{NBin}
+\begin{NBprint}
+Riemannian metric g on the 2-dimensional differentiable manifold M
+\end{NBprint}
 Note that we could have defined $g$ intrinsically, i.e.\ by providing its components in the two vector frames \code{eU} and \code{eV}, as we did for the metric $h$ on $\mathbb{R}^3$. Instead, we have chosen to get it as the pullback by $\Phi$ of $h$, as an example of pullback associated with some differential map.
 
 The metric is a symmetric tensor field of type (0,2):
-\jup{te109.png}
+\begin{NBin}
+g.tensor_type()
+\end{NBin}
+\begin{NBoutM}
+\left(0, 2\right)
+\end{NBoutM}
 The expression of the metric in terms of the default frame on $M$ (\code{eU}):
-\jup{te110.png}
+\begin{NBin}
+g.display()
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+g = \left( \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \mathrm{d} x\otimes \mathrm{d} x $\\
+$\displaystyle
++ \left( \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \mathrm{d} y\otimes \mathrm{d} y$
+\end{NBout}
 We may factorize the metric components to get a better display:
-\jup{te111.png}
-\jup{te112.png}
+\begin{NBin}
+g[0,0].factor(); g[1,1].factor()
+\end{NBin}
+\begin{NBoutM}
+\frac{4}{{\left(x^{2} + y^{2} + 1\right)}^{2}}
+\end{NBoutM}
+\begin{NBin}
+g.display()
+\end{NBin}
+\begin{NBoutM}
+g = \frac{4}{{\left(x^{2} + y^{2} + 1\right)}^{2}} \mathrm{d} x\otimes \mathrm{d} x + \frac{4}{{\left(x^{2} + y^{2} + 1\right)}^{2}} \mathrm{d} y\otimes \mathrm{d} y
+\end{NBoutM}
 A matrix view of the components of $g$ in the manifold's default frame:
-\jup{te113.png}
+\begin{NBin}
+g[:]
+\end{NBin}
+\begin{NBoutM}
+\left(\begin{array}{rr}
+    \frac{4}{{\left(x^{2} + y^{2} + 1\right)}^{2}} & 0 \\
+    0 & \frac{4}{{\left(x^{2} + y^{2} + 1\right)}^{2}}
+    \end{array}\right)
+\end{NBoutM}
 Display in terms of the vector frame $(V, (\partial_{x'}, \partial_{y'}))$:
-\jup{te114.png}
+\begin{NBin}
+g.display(eV)
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+g = \left( \frac{4}{{x'}^{4} + {y'}^{4} + 2 \, {\left({x'}^{2} + 1\right)} {y'}^{2} + 2 \, {x'}^{2} + 1} \right) \mathrm{d} {x'}\otimes \mathrm{d} {x'}$\\
+$\displaystyle + \left( \frac{4}{{x'}^{4} + {y'}^{4} + 2 \, {\left({x'}^{2} + 1\right)} {y'}^{2} + 2 \, {x'}^{2} + 1} \right) \mathrm{d} {y'}\otimes \mathrm{d} {y'}$
+\end{NBout}
 The metric acts on vector field pairs, resulting in a scalar field:
-\jup{te115.png}
-\jup{te116.png}
-\jup{te117.png}
+\begin{NBin}
+print(g(v,v))
+\end{NBin}
+\begin{NBprint}
+Scalar field g(v,v) on the 2-dimensional differentiable manifold M
+\end{NBprint}
+\begin{NBin}
+g(v,v).parent()
+\end{NBin}
+\begin{NBoutM}
+C^{\infty}\left(M\right)
+\end{NBoutM}
+\begin{NBin}
+g(v,v).display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} g\left(v,v\right):& M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \frac{4 \, {\left(4 \, x^{4} + 4 \, y^{4} + 8 \, {\left(x^{2} + 1\right)} y^{2} + 8 \, x^{2} + 5\right)}}{x^{8} + y^{8} + 4 \, {\left(x^{2} + 1\right)} y^{6} + 4 \, x^{6} + 6 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{4} + 6 \, x^{4} + 4 \, {\left(x^{6} + 3 \, x^{4} + 3 \, x^{2} + 1\right)} y^{2} + 4 \, x^{2} + 1} \\[1ex] \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \frac{4 \, {\left(5 \, {x'}^{8} + 5 \, {y'}^{8} + 4 \, {\left(5 \, {x'}^{2} + 2\right)} {y'}^{6} + 8 \, {x'}^{6} + 2 \, {\left(15 \, {x'}^{4} + 12 \, {x'}^{2} + 2\right)} {y'}^{4} + 4 \, {x'}^{4} + 4 \, {\left(5 \, {x'}^{6} + 6 \, {x'}^{4} + 2 \, {x'}^{2}\right)} {y'}^{2}\right)}}{{x'}^{8} + {y'}^{8} + 4 \, {\left({x'}^{2} + 1\right)} {y'}^{6} + 4 \, {x'}^{6} + 6 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{4} + 6 \, {x'}^{4} + 4 \, {\left({x'}^{6} + 3 \, {x'}^{4} + 3 \, {x'}^{2} + 1\right)} {y'}^{2} + 4 \, {x'}^{2} + 1} \end{array}
+\end{NBoutM}
 
 \subsection{Levi-Civita connection}
 
 The Levi-Civita connection associated with the metric $g$ is
-\jup{te118.png}
+\begin{NBin}
+nab = g.connection()
+print(nab)
+nab
+\end{NBin}
+\begin{NBprint}
+Levi-Civita connection nabla_g associated with the Riemannian metric g on
+the 2-dimensional differentiable manifold M
+\end{NBprint}
+\begin{NBoutM}
+\nabla_{g}
+\end{NBoutM}
 The nonzero Christoffel symbols of $g$ (skipping those that can be deduced by symmetry on the last two indices) w.r.t. the chart \code{XU}:
-\jup{te119.png}
+\begin{NBin}
+g.christoffel_symbols_display(chart=XU)
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{lcl} \Gamma_{ \phantom{\, x} \, x \, x }^{ \, x \phantom{\, x} \phantom{\, x} } & = & -\frac{2 \, x}{x^{2} + y^{2} + 1} \\ \Gamma_{ \phantom{\, x} \, x \, y }^{ \, x \phantom{\, x} \phantom{\, y} } & = & -\frac{2 \, y}{x^{2} + y^{2} + 1} \\ \Gamma_{ \phantom{\, x} \, y \, y }^{ \, x \phantom{\, y} \phantom{\, y} } & = & \frac{2 \, x}{x^{2} + y^{2} + 1} \\ \Gamma_{ \phantom{\, y} \, x \, x }^{ \, y \phantom{\, x} \phantom{\, x} } & = & \frac{2 \, y}{x^{2} + y^{2} + 1} \\ \Gamma_{ \phantom{\, y} \, x \, y }^{ \, y \phantom{\, x} \phantom{\, y} } & = & -\frac{2 \, x}{x^{2} + y^{2} + 1} \\ \Gamma_{ \phantom{\, y} \, y \, y }^{ \, y \phantom{\, y} \phantom{\, y} } & = & -\frac{2 \, y}{x^{2} + y^{2} + 1} \end{array}
+\end{NBoutM}
 $\nabla_g$ acting on the vector field $\w{v}$:
-\jup{te120.png}
-\jup{te121.png}
+\begin{NBin}
+Dv = nab(v)
+print(Dv)
+\end{NBin}
+\begin{NBprint}
+Tensor field nabla_g(v) of type (1,1) on the 2-dimensional differentiable
+manifold M
+\end{NBprint}
+\begin{NBin}
+Dv.display()
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+\nabla_{g} v = \left( \frac{4 \, {\left(y^{3} + {\left(x^{2} + 1\right)} y - x\right)}}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} x $\\
+$\displaystyle
++ \left( -\frac{4 \, {\left(x^{3} + x y^{2} + x + y\right)}}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} y $\\
+$\displaystyle
++ \left( \frac{2 \, {\left(2 \, x^{3} + 2 \, x y^{2} + 2 \, x + y\right)}}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} x$\\
+$\displaystyle
+ + \left( \frac{2 \, {\left(2 \, y^{3} + 2 \, {\left(x^{2} + 1\right)} y - x\right)}}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} y$
+\end{NBout}
 
 \subsection{Curvature}
 
 The Riemann curvature tensor of the metric $g$ is
-\jup{te122.png}
+\begin{NBin}
+Riem = g.riemann()
+print(Riem)
+Riem.display()
+\end{NBin}
+\begin{NBprint}
+Tensor field Riem(g) of type (1,3) on the 2-dimensional differentiable
+manifold M
+\end{NBprint}
+\begin{NBout}
+$\displaystyle
+\mathrm{Riem}\left(g\right) = \left( \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} y\otimes \mathrm{d} x\otimes \mathrm{d} y $\\
+$\displaystyle + \left( -\frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} y\otimes \mathrm{d} y\otimes \mathrm{d} x$\\
+$\displaystyle
+ + \left( -\frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} x\otimes \mathrm{d} x\otimes \mathrm{d} y$\\
+$\displaystyle
+ + \left( \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} x\otimes \mathrm{d} y\otimes \mathrm{d} x$
+\end{NBout}
 The components of the Riemann tensor in the default frame on $M$ are
-\jup{te123.png}
+\begin{NBin}
+Riem.display_comp()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{lcl} \mathrm{Riem}\left(g\right)_{ \phantom{\, x} \, y \, x \, y }^{ \, x \phantom{\, y} \phantom{\, x} \phantom{\, y} } & = & \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \\ \mathrm{Riem}\left(g\right)_{ \phantom{\, x} \, y \, y \, x }^{ \, x \phantom{\, y} \phantom{\, y} \phantom{\, x} } & = & -\frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \\ \mathrm{Riem}\left(g\right)_{ \phantom{\, y} \, x \, x \, y }^{ \, y \phantom{\, x} \phantom{\, x} \phantom{\, y} } & = & -\frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \\ \mathrm{Riem}\left(g\right)_{ \phantom{\, y} \, x \, y \, x }^{ \, y \phantom{\, x} \phantom{\, y} \phantom{\, x} } & = & \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \end{array}
+\end{NBoutM}
 The parent of the Riemann tensor is the $C^\infty(M)$-module of
 type-(1,3) tensor fields on $M$:
-\jup{te124.png}
+\begin{NBin}
+print(Riem.parent())
+\end{NBin}
+\begin{NBprint}
+Module T^(1,3)(M) of type-(1,3) tensors fields on the 2-dimensional
+differentiable manifold M
+\end{NBprint}
 The Riemann tensor is antisymmetric on its two last indices (i.e.\ the indices
 at position 2 and 3, the first index being at position 0):
-\jup{te125.png}
+\begin{NBin}
+Riem.symmetries()
+\end{NBin}
+\begin{NBout}
+\texttt{no symmetry; antisymmetry:~(2, 3)}
+\end{NBout}
 The Riemann tensor of the Euclidean metric $h$ on $\mathbb{R}^3$ is identically zero,
 i.e.\ $h$ is a flat metric:
-\jup{te126.png}
+\begin{NBin}
+h.riemann().display()
+\end{NBin}
+\begin{NBoutM}
+\mathrm{Riem}\left(h\right) = 0
+\end{NBoutM}
 The Ricci tensor is
-\jup{te127.png}
+\begin{NBin}
+Ric = g.ricci()
+Ric.display()
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+\mathrm{Ric}\left(g\right) = \left( \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \mathrm{d} x\otimes \mathrm{d} x $\\
+$\displaystyle
++ \left( \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \mathrm{d} y\otimes \mathrm{d} y$
+\end{NBout}
 while the Ricci scalar is
-\jup{te128.png}
+\begin{NBin}
+R = g.ricci_scalar()
+R.display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} \mathrm{r}\left(g\right):& M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & 2 \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & 2 \end{array}
+\end{NBoutM}
 We recover the fact that $(\mathbb{S}^2,g)$ is a Riemannian manifold of constant positive curvature.
 
 In dimension 2, the Riemann curvature tensor is entirely determined by the Ricci scalar $R$ according to
@@ -148,28 +455,45 @@ In dimension 2, the Riemann curvature tensor is entirely determined by the Ricci
 \ee
 Let us check this formula here, under the form
 $R^i_{\ \, jlk} = -R g_{j[k} \delta^i_{\ \, l]}$:
-\jup{te129.png}
+\begin{NBin}
+delta = M.tangent_identity_field()
+Riem == - R*(g*delta).antisymmetrize(2,3)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 Similarly the relation $\mathrm{Ric} = (R/2)\; g$ must hold:
-\jup{te130.png}
+\begin{NBin}
+Ric == (R/2)*g
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 
 \subsection{Volume form}
 
 The \defin{volume form} (or \defin{Levi-Civita tensor}) associated with the
 metric $g$ and for which the vector frame $(\partial_x,\partial_y)$ is
 right-handed is the following 2-form:
-\jup{te131.png}
+\begin{NBin}
+eps = g.volume_form()
+print(eps)
+eps.display()
+\end{NBin}
+\begin{NBoutM}
+\epsilon_{g} = \left( \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \mathrm{d} x\wedge \mathrm{d} y
+\end{NBoutM}
 The exterior derivative of $\epsilon_g$ is a 3-form:
-\jup{te132.png}
+\begin{NBin}
+print(eps.exterior_derivative())
+\end{NBin}
+\begin{NBprint}
+3-form deps_g on the 2-dimensional differentiable manifold M
+\end{NBprint}
 Of course, since the dimension of $M$ is 2, all 3-forms vanish identically:
-\jup{te133.png}
-
-
-
-
-
-
-
-
-
-
-
+\begin{NBin}
+eps.exterior_derivative().display()
+\end{NBin}
+\begin{NBoutM}
+\mathrm{d}\epsilon_{g} = 0
+\end{NBoutM}

@@ -73,7 +73,7 @@ Point p on the 2-dimensional differentiable manifold M
 The canonical embedding of $\Sp$ in $\R^3$ is defined mostly for
 graphical purposes:
 \begin{NBin}
-R3 = Manifold(3, 'R^3', r'\\mathbb{R}^3')
+R3 = Manifold(3, 'R^3', r'\mathbb{R}^3')
 XR3.<X,Y,Z> = R3.chart()
 Phi = M.diff_map(R3, {(XU, XR3):
                        [2*x/(1+x^2+y^2), 2*y/(1+x^2+y^2),
@@ -232,18 +232,19 @@ private dictionary \code{\_components}, which stores the components of $\w{v}$ i
 \begin{NBin}
 vp._components
 \end{NBin}
-\begin{NBoutM}
-\left\{\left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right) :
-\mbox{\texttt{1-index components w.r.t.~Basis (d/dx,d/dy) on the Tangent space at Point p on the 2-dimensional differentiable manifold M}}
-\right\}
-\end{NBoutM}
+\begin{NBout}
+$\displaystyle
+\bigg\{\left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right) :$\\
+\texttt{1-index components w.r.t.~Basis (d/dx,d/dy) on the Tangent space at Point p on the 2-dimensional differentiable manifold M}
+$\bigg\}$
+\end{NBout}
 The keys of the dictionary \code{\_components} are the bases of $T_p M$, while the values belong to the class \code{Components}\footurl{http://doc.sagemath.org/html/en/reference/tensor_free_modules/sage/tensor/modules/comp.html} devoted to store ring elements indexed by integers or tuples of integers:
 \begin{NBin}
 vpc = vp._components[Tp.default_basis()]
 vpc
 \end{NBin}
 \begin{NBout}
-\texttt{1-index components w.r.t. Basis (d/dx,d/dy) on the Tangent space at Point p
+\texttt{1-index components w.r.t.~Basis (d/dx,d/dy) on the Tangent space at Point p
 on the 2-dimensional differentiable manifold M}
 \end{NBout}
 \begin{NBin}
@@ -479,8 +480,8 @@ type(YM)
 \end{NBin}
 \begin{NBout}
 \begin{verbatim}
-<class
- 'sage.manifolds.differentiable.vectorfield_module.VectorFieldModule_with_category'>
+<class 'sage.manifolds.differentiable.vectorfield_module.
+        VectorFieldModule_with_category'>
 \end{verbatim}
 \end{NBout}
 On the contrary, the set $\mathfrak{X}(U)$ of vector fields on $U$ is a free module of
@@ -522,53 +523,150 @@ U.atlas()
 This chart is \code{XU} = $(U, (x,y))$, i.e.\ the chart of stereographic coordinates
 from the North pole.
 The rank of $\X(U)$ as a free $C^\infty(U)$-module is the manifold's dimension:
-\jup{ve35.png}
+\begin{NBin}
+rank(YU)
+\end{NBin}
+\begin{NBoutM}
+2
+\end{NBoutM}
 Via the category framework,
 the free module $\X(U)$ is implemented by a dynamically-generated subclass
 of the class \code{VectorFieldFreeModule}, which is devoted to modules of vector fields
 on parallelizable manifolds:
-\jup{ve36.png}
+\begin{NBin}
+type(YU)
+\end{NBin}
+\begin{NBout}
+\begin{verbatim}
+<class 'sage.manifolds.differentiable.vectorfield_module.
+        VectorFieldFreeModule_with_category'>
+\end{verbatim}
+\end{NBout}
 The class \code{VectorFieldFreeModule} is itself a subclass
 of the generic class\\ \code{FiniteRankFreeModule}:
-\jup{ve37.png}
+\begin{NBin}
+class_graph(
+  sage.manifolds.differentiable.vectorfield_module.VectorFieldFreeModule
+).plot()
+\end{NBin}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{vfmodule_class.png}
+\end{center}
 
 Since $U$ is a chart domain, the free module $\X(U)$ is automatically endowed with a basis,
 which is the coordinate frame associated to the chart:
-\jup{ve38.png}
+\begin{NBin}
+YU.bases()
+\end{NBin}
+\begin{NBoutM}
+\left[\left(U, \left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right)\right)\right]
+\end{NBoutM}
 Let us denote by \code{eU} this frame. We can set \code{eU = YU.bases()[0]} or
 alternatively
-\jup{ve39.png}
+\begin{NBin}
+eU = YU.default_basis()
+eU
+\end{NBin}
+\begin{NBoutM}
+\left(U, \left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right)\right)
+\end{NBoutM}
 Another equivalent instruction would have been \code{eU = U.default\_frame()}.
 
 Similarly, $\X(V)$ is a free module, endowed with the coordinate frame
 associated to stereographic coordinates from the South pole, which we
 denote by \code{eV}:
-\jup{ve40.png}
-\jup{ve41.png}
+\begin{NBin}
+YV = V.vector_field_module()
+YV.bases()
+\end{NBin}
+\begin{NBoutM}
+\left[\left(V, \left(\frac{\partial}{\partial {x'} },\frac{\partial}{\partial {y'} }\right)\right)\right]
+\end{NBoutM}
+\begin{NBin}
+eV = YV.default_basis()
+eV
+\end{NBin}
+\begin{NBoutM}
+\left(V, \left(\frac{\partial}{\partial {x'} },\frac{\partial}{\partial {y'} }\right)\right)
+\end{NBoutM}
 
 If we consider the intersection $W=U\cap V$, we notice its module
 of vector fields is endowed with two bases, reflecting the fact that
 $W$ is covered by two charts: $(W,(x,y))$ and $(W,(x',y'))$:
-\jup{ve42.png}
+\begin{NBin}
+W = U.intersection(V)
+YW = W.vector_field_module()
+YW.bases()
+\end{NBin}
+\begin{NBoutM}
+\left[\left(W, \left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right)\right), \left(W, \left(\frac{\partial}{\partial {x'} },\frac{\partial}{\partial {y'} }\right)\right)\right]
+\end{NBoutM}
 Let us denote by \code{eUW} and \code{eUV} these two bases, which are
 actually the restrictions of the vector frames \code{eU} and \code{eV} to
 $W$:
-\jup{ve43.png}
+\begin{NBin}
+eUW = eU.restrict(W)
+eVW = eV.restrict(W)
+YW.bases() == [eUW, eVW]
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 The free module $\X(W)$ is also automatically endowed with automorphisms
 connecting the two bases, i.e.\ change-of-frame operators:
-\jup{ve44.png}
+\begin{NBin}
+W.changes_of_frame()
+\end{NBin}
+\begin{NBout}
+\[
+\bigg\{\left(\left(W, \left(\frac{\partial}{\partial {x'} },\frac{\partial}{\partial {y'} }\right)\right), \left(W, \left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right)\right)\right) :
+\]
+Field of tangent-space automorphisms on the Open subset W of the 2-dimensional differentiable manifold M,
+\[
+\left(\left(W, \left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right)\right), \left(W, \left(\frac{\partial}{\partial {x'} },\frac{\partial}{\partial {y'} }\right)\right)\right) :
+\]
+Field of tangent-space automorphisms on the Open subset W of the 2-dimensional differentiable manifold M $\bigg\}$
+\end{NBout}
 The first of them is
-\jup{ve45.png}
+\begin{NBin}
+P = W.change_of_frame(eUW, eVW)
+P
+\end{NBin}
+\begin{NBout}
+\texttt{Field of tangent-space automorphisms on the Open subset W of the 2-dimensional
+differentiable manifold M}
+\end{NBout}
 It belongs to the general linear group of the free module $\X(W)$:
-\jup{ve46.png}
+\begin{NBin}
+P.parent()
+\end{NBin}
+\begin{NBoutM}
+\mathrm{GL}\left( \mathfrak{X}\left(W\right) \right)
+\end{NBoutM}
 and its matrix is deduced from the Jacobian matrix of the transition map
 \code{XV} $\to$ \code{XU}:
-\jup{ve47.png}
+\begin{NBin}
+P[:]
+\end{NBin}
+\begin{NBoutM}
+\left(\begin{array}{rr}
+-x^{2} + y^{2} & -2 \, x y \\
+-2 \, x y & x^{2} - y^{2}
+\end{array}\right)
+\end{NBoutM}
 
 \subsection{Construction and manipulation of vector fields}
 
 Let us introduce a vector field $\w{v}$ on $\M$:
-\jup{ve48.png}
+\begin{NBin}
+v = M.vector_field(name='v')
+v[eU, 0] = f.restrict(U)
+v[eU, 1] = -2
+v.display(eU)
+\end{NBin}
+\begin{NBoutM}
+v = \left( \frac{1}{x^{2} + y^{2} + 1} \right) \frac{\partial}{\partial x } -2 \frac{\partial}{\partial y }
+\end{NBoutM}
 Notice that, at this stage, we have defined $\w{v}$ only on $U$, by setting
 its components in the vector frame \code{eU}, either explicitly as scalar
 fields, like the component $v^0$ set to the restriction of $f$ to $U$ or
@@ -577,52 +675,139 @@ will be coerced to the constant scalar field of value $-2$ (cf.\ Sec.~\ref{s:man
 We can ask for the scalar-field value of a component via the double-bracket
 operator; since \code{eU} is the default frame on $M$, we do not have to specify
 it:
-\jup{ve49.png}
-\jup{ve50.png}
+\begin{NBin}
+v[[0]]
+\end{NBin}
+\begin{NBoutM}
+f
+\end{NBoutM}
+\begin{NBin}
+v[[0]].display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} f:& U & \longrightarrow & \mathbb{R} \\ & \left(x, y\right) & \longmapsto & \frac{1}{x^{2} + y^{2} + 1} \\ \mbox{on}\ W : & \left({x'}, {y'}\right) & \longmapsto & \frac{{x'}^{2} + {y'}^{2}}{{x'}^{2} + {y'}^{2} + 1} \end{array}
+\end{NBoutM}
 Note that, for convenience, the single bracket operator returns a chart function
 of the component:
-\jup{ve51.png}
+\begin{NBin}
+v[0]
+\end{NBin}
+\begin{NBoutM}
+\frac{1}{x^{2} + y^{2} + 1}
+\end{NBoutM}
 The restriction of $\w{v}$ to $W$ is of course
-\jup{ve52.png}
+\begin{NBin}
+v.restrict(W).display(eUW)
+\end{NBin}
+\begin{NBoutM}
+v = \left( \frac{1}{x^{2} + y^{2} + 1} \right) \frac{\partial}{\partial x } -2 \frac{\partial}{\partial y }
+\end{NBoutM}
 Since we have a second vector frame on $W$, namely \code{eVW}, and the
 change-of-frame automorphisms are known, we can ask for the components
 of $\w{v}$ with respect to that frame:
-\jup{ve53.png}
+\begin{NBin}
+v.restrict(W).display(eVW)
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+v = \left( \frac{4 \, x y^{3} - x^{2} + 4 \, {\left(x^{3} + x\right)} y + y^{2}}{x^{6} + y^{6} + {\left(3 \, x^{2} + 1\right)} y^{4} + x^{4} + {\left(3 \, x^{4} + 2 \, x^{2}\right)} y^{2}} \right) \frac{\partial}{\partial {x'} }$ \\
+$\displaystyle
++ \left( -\frac{2 \, {\left(x^{4} - y^{4} + x^{2} + x y - y^{2}\right)}}{x^{6} + y^{6} + {\left(3 \, x^{2} + 1\right)} y^{4} + x^{4} + {\left(3 \, x^{4} + 2 \, x^{2}\right)} y^{2}} \right) \frac{\partial}{\partial {y'} }$
+\end{NBout}
 Notice that the components are expressed in terms of the coordinates $(x,y)$
 since they form the default chart on $W$. To have them expressed in
 terms of the coordinates $(x',y')$, we have to add the restriction of
 the chart
 $(V,(x',y'))$ to $W$ as the second argument of the method
 \code{display()}:
-\jup{ve54.png}
+\begin{NBin}
+v.restrict(W).display(eVW, XV.restrict(W))
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+v = \left( -\frac{{x'}^{4} - 4 \, {x'} {y'}^{3} - {y'}^{4} - 4 \, {\left({x'}^{3} + {x'}\right)} {y'}}{{x'}^{2} + {y'}^{2} + 1} \right) \frac{\partial}{\partial {x'} } $\\
+$\displaystyle
++ \left( -\frac{2 \, {\left({x'}^{4} + {x'}^{3} {y'} + {x'} {y'}^{3} - {y'}^{4} + {x'}^{2} - {y'}^{2}\right)}}{{x'}^{2} + {y'}^{2} + 1} \right) \frac{\partial}{\partial {y'} }$
+\end{NBout}
 We extend the expression of $\w{v}$ to the full vector frame \code{XV}
 by continuation of this expression:
-\jup{ve55.png}
+\begin{NBin}
+v.add_comp_by_continuation(eV, W, chart=XV)
+\end{NBin}
+\ \\
 We have then
-\jup{ve56.png}
+\begin{NBin}
+v.display(eV)
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+v = \left( -\frac{{x'}^{4} - 4 \, {x'} {y'}^{3} - {y'}^{4} - 4 \, {\left({x'}^{3} + {x'}\right)} {y'}}{{x'}^{2} + {y'}^{2} + 1} \right) \frac{\partial}{\partial {x'} }$\\
+$\displaystyle
+ + \left( -\frac{2 \, {\left({x'}^{4} + {x'}^{3} {y'} + {x'} {y'}^{3} - {y'}^{4} + {x'}^{2} - {y'}^{2}\right)}}{{x'}^{2} + {y'}^{2} + 1} \right) \frac{\partial}{\partial {y'} }$
+\end{NBout}
 At this stage, the vector field $\w{v}$ is defined in all $M$.
 According to the hairy ball theorem\index{hairy ball theorem}, it has to vanish somewhere.
 Let us show that this occurs at the North pole, by first introducing the
 latter, as the point of stereographic coordinates $(x',y')=(0,0)$:
-\jup{ve57.png}
+\begin{NBin}
+N = M((0,0), chart=XV, name='N')
+print(N)
+\end{NBin}
+\begin{NBprint}
+Point N on the 2-dimensional differentiable manifold M
+\end{NBprint}
 As a check, we verify that the image of $N$ by the canonical embedding
 $\Phi: \Sp \to \R^3$ is the point of Cartesian coordinates $(0,0,1)$:
-\jup{ve58.png}
+\begin{NBin}
+XR3(Phi(N))
+\end{NBin}
+\begin{NBoutM}
+(0, 0, 1)
+\end{NBoutM}
 The vanishing of $\left.\w{v}\right| _N$:
-\jup{ve59.png}
+\begin{NBin}
+v.at(N).display()
+\end{NBin}
+\begin{NBoutM}
+v = 0
+\end{NBoutM}
 On the other hand, $\w{v}$ does not vanish at the point $p$ introduced above:
-\jup{ve60.png}
-
+\begin{NBin}
+v.at(p).display()
+\end{NBin}
+\begin{NBoutM}
+v = \frac{1}{6} \frac{\partial}{\partial x } -2 \frac{\partial}{\partial y }
+\end{NBoutM}
 We may plot the vector field $\w{v}$ in terms of the stereographic coordinates
 from the North pole:
-\jup{ve61a.png}
-\jup{ve61b.png}
+\begin{NBin}
+v.plot(chart=XU, chart_domain=XU, max_range=2,
+       number_values=5, scale=0.4, aspect_ratio=1)
+\end{NBin}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{plot_v_North.png}
+\end{center}
 or in term of those from the South pole:
-\jup{ve62.png}
+\begin{NBin}
+v.plot(chart=XV, chart_domain=XV, max_range=2,
+       number_values=9, scale=0.05, aspect_ratio=1)
+\end{NBin}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{plot_v_South.png}
+\end{center}
 Thanks to the embedding $\Phi$, we may also have a 3D plot of the vector
 field $\w{v}$
 atop of the 3D plot already obtained:
-\jup{ve63.png}
+\begin{NBin}
+graph_v = v.plot(chart=XR3, mapping=Phi, chart_domain=XU,
+                 number_values=7, scale=0.2) + \
+          v.plot(chart=XR3, mapping=Phi, chart_domain=XV,
+                 number_values=7, scale=0.2)
+show(graph + graph_v, viewer='threejs', online=True)
+\end{NBin}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{plot_v_3d.png}
+\end{center}
 Note that the sampling, performed on the two charts \code{XU} and \code{XV}
 is not uniform on the sphere. A better sampling would be achieved by introducing
 spherical coordinates.
@@ -633,7 +818,12 @@ Let us now investigate some internals of the implementation of vector fields.
 Vector fields on $M$ are implemented via the class
 \code{VectorField}\footurl{http://doc.sagemath.org/html/en/reference/manifolds/sage/manifolds/differentiable/vectorfield.html} (actually by a dynamically generated subclass of it, within \Sage{} category
 framework):
-\jup{ve64.png}
+\begin{NBin}
+isinstance(v, sage.manifolds.differentiable.vectorfield.VectorField)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 
 Since $M$ is not parallelizable, the defining data of a
 vector field $\w{v}$ on $M$ are its restrictions
@@ -642,14 +832,30 @@ to parallelizable open subsets $U_i$,
 following the scheme presented in Sec.~\ref{s:vec:vector_field_impl}.
 These restrictions are stored in the private dictionary \code{\_restrictions}, whose keys are
 the open subsets:
-\jup{ve65.png}
+\begin{NBin}
+v._restrictions
+\end{NBin}
+\begin{NBoutM}
+\left\{V : v, W : v, U : v\right\}
+\end{NBoutM}
 Let us consider one of these restrictions, for instance the restriction
 $\left. \w{v}\right| _U$ to $U$:
-\jup{ve66.png}
+\begin{NBin}
+vU = v._restrictions[U]
+vU is v.restrict(U)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 Since $U$ is a parallelizable open subset, the object \code{vU} belongs
 to the class \code{VectorFieldParal}, which is devoted to vector fields
 on parallelizable manifolds:
-\jup{ve67.png}
+\begin{NBin}
+isinstance(vU, sage.manifolds.differentiable.vectorfield.VectorFieldParal)
+\end{NBin}
+\begin{NBout}
+\texttt{True}
+\end{NBout}
 The class \code{VectorFieldParal} inherits both from
 \code{FiniteRankFreeModuleElement} (as \code{TangentVector}) and from
 \code{VectorField} (see Fig.~\ref{f:vec:tensorfield_classes}).
@@ -668,18 +874,58 @@ this figure. For instance, the class \code{VectorFieldParal} is declared as
 The defining data of $\left. \w{v}\right| _U$ are
 its sets of components with respect to (possibly various)
 vector frames on $U$, according to Eq.~\eqref{e:vec:vi_expand}. The sets of components are stored in the private dictionary \code{\_components}, whose keys are the vector frames:
-\jup{ve68.png}
+\begin{NBin}
+vU._components
+\end{NBin}
+\begin{NBoutM}
+\left\{\left(U, \left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right)\right) :
+\mbox{\texttt{1-index components w.r.t.~Coordinate frame (U, (d/dx,d/dy))}}\right\}
+\end{NBoutM}
 Similarly, we have:
-\jup{ve69.png}
+\begin{NBin}
+v._restrictions[W]._components
+\end{NBin}
+\begin{NBout}
+\[
+\bigg\{\left(W, \left(\frac{\partial}{\partial x },\frac{\partial}{\partial y }\right)\right) :
+\mbox{\texttt{1-index components w.r.t.~Coordinate frame (W, (d/dx,d/dy))}},
+\]
+\[
+\left(W, \left(\frac{\partial}{\partial {x'} },\frac{\partial}{\partial {y'} }\right)\right) :
+\mbox{\texttt{1-index components w.r.t.~Coordinate frame (W, (d/dxp,d/dyp)}}
+\bigg\}
+\]
+\end{NBout}
 The values of the dictionary \code{\_components} belong to the same class
 \code{Components} as that discussed in Sec.~\ref{s:vec:tangent_impl} for
 the storage of components of tangent vectors:
-\jup{ve70.png}
-\jup{ve71.png}
+\begin{NBin}
+vUc = vU._components[eU]
+vUc
+\end{NBin}
+\begin{NBout}
+\texttt{1-index components w.r.t.~Coordinate frame (U, (d/dx,d/dy))}
+\end{NBout}
+\begin{NBin}
+type(vUc)
+\end{NBin}
+\begin{NBout}
+\begin{verbatim}
+<class 'sage.tensor.modules.comp.Components'>
+\end{verbatim}
+\end{NBout}
 As already mentioned in Sec.~\ref{s:vec:tangent_impl}, the components themselves are stored
 in the private attribute \code{\_comp} of the \code{Components} object; this is a dictionary
 whose keys are the indices:
-\jup{ve72.png}
+\begin{NBin}
+vUc._comp
+\end{NBin}
+\begin{NBout}
+$\displaystyle
+\big\{\left(0\right) : f, $\\
+$\displaystyle
+\phantom{x}\left(1\right) : \mbox{Scalar field on the Open subset U of the 2-dimensional differentiable manifold M}\big\}$
+\end{NBout}
 The difference with the tangent vector case is that the values of that dictionary are now scalar fields, i.e.\ elements of $C^\infty(U)$ in the present case. This is of course in agreement with the treatment of $\mathfrak{X}(U)$ as a free module over $C^\infty(U)$,
 as discussed in Sec.~\ref{s:vec:vector_field_impl}.
 Taking into account the storage of scalar fields presented in Sec.~\ref{s:man:def_scalar},
@@ -701,9 +947,17 @@ branch is indicated by grey connectors. In the special case of vector fields, th
 \end{figure}
 
 Let us perform some algebraic operation on vector fields:
-\jup{ve73.png}
+\begin{NBin}
+w = v + f*v
+w
+\end{NBin}
+\begin{NBout}
+Vector field on the 2-dimensional differentiable manifold M
+\end{NBout}
 The code for the addition is accessible via
-\jup{ve74.png}
+\begin{NBin}
+v.__add__??
+\end{NBin}
 \begin{lstlisting}
 File: .../src/sage/structure/element.pyx
 def __add__(left, right):
@@ -735,7 +989,9 @@ via the method \code{\_add\_()}
 (note the single underscore on each side of \code{add}). This operator is
 implemented at the level of \code{TensorField}, as it can be checked from the source code
 (see lines~3 and 29 below):
-\jup{ve75.png}
+\begin{NBin}
+v._add_??
+\end{NBin}
 \begin{lstlisting}
 def _add_(self, other):
     """
@@ -775,7 +1031,9 @@ is simply the set up of the vector field object containing the result.
 Recursively, the addition performed in line~17 will reach a level at which
 the domains are parallelizable. Then a different method \code{\_add\_()}, will
 be involved, as we can check on \code{vU}:
-\jup{ve76.png}
+\begin{NBin}
+vU._add_??
+\end{NBin}
 \begin{lstlisting}
 def _add_(self, other):
     """
@@ -821,7 +1079,9 @@ latter has been defined above as \code{vUc = vU.\_components[eU]}, i.e.
 \code{vUc} represents the set of components of the vector field
 $\left. \w{v}\right| _U$ in the basis \code{eU} $=(\partial/\partial x, \partial/\partial y)$
 of $\mathfrak{X}(U)$:
-\jup{ve77.png}
+\begin{NBin}
+vUc.__add__??
+\end{NBin}
 \begin{lstlisting}
 def __add__(self, other):
     """
@@ -875,5 +1135,16 @@ since each component being an element of $C^\infty(U)$, the base ring of $\mathf
 The action of $\w{v}$ on $f$ is defined pointwise by
 considering $\w{v}$ at each point $p\in M$ as a derivation (the very definition of a tangent vector,
 cf.\ Sec.~\ref{s:vec:def_tangent_vector}); the result is then a scalar field $\w{v}(f)$ on $M$:
-\jup{ve78.png}
-\jup{ve79.png}
+\begin{NBin}
+vf = v(f)
+vf
+\end{NBin}
+\begin{NBoutM}
+v\left(f\right)
+\end{NBoutM}
+\begin{NBin}
+vf.display()
+\end{NBin}
+\begin{NBoutM}
+\begin{array}{llcl} v\left(f\right):& M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \frac{2 \, {\left(2 \, y^{3} + 2 \, {\left(x^{2} + 1\right)} y - x\right)}}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \\[1ex] \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & -\frac{2 \, {\left({x'}^{5} + 2 \, {x'}^{3} {y'}^{2} + {x'} {y'}^{4} - 2 \, {y'}^{5} - 2 \, {\left(2 \, {x'}^{2} + 1\right)} {y'}^{3} - 2 \, {\left({x'}^{4} + {x'}^{2}\right)} {y'}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \end{array}
+\end{NBoutM}
