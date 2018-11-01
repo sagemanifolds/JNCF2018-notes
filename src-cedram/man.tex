@@ -531,18 +531,18 @@ representing the scalar field $f$ on the chart $X$
 (cf.\ Eq.~\eqref{e:man:repr_scalar_field}).
 
 Internally, each chart function stores coordinate expressions with respect
-to various computational engines:
+to various computational backends:
 \begin{itemize}
 \item \Sage{} symbolic engine, based on the \soft{Pynac}\footnote{\url{http://pynac.org}}\index{Pynac} backend, with \soft{Maxima} used for some simplifications
 or computation of integrals;
 \item \soft{SymPy}\footnote{\url{http://www.sympy.org}}\index{SymPy} (Python library for symbolic mathematics);
-\item in the future, more symbolic or numerical engines will be implemented.
+\item in the future, more symbolic or numerical backends will be implemented.
 \end{itemize}
 The coordinate expressions are stored in the private dictionary \code{\_express}\footnote{not to be confused with
 the attribute \code{\_express} of class \code{DiffScalarField} presented
 at \code{In~[26]}}
 of the class \code{ChartFunction},
-whose keys are strings identifying the computational engines. By default
+whose keys are strings identifying the computational backends. By default
 only \Sage{} symbolic expressions, i.e.\ expressions pertaining
 to the so-called \Sage{}'s Symbolic Ring (\code{SR}),
 are stored:
@@ -569,10 +569,10 @@ type(fU.expr())
 \end{verbatim}
 \end{NBout}
 Actually, \code{fU.expr()} is a shortcut for \code{fU.expr('SR')} since
-\code{SR} is the default symbolic engine. Note that the class
+\code{SR} is the default symbolic backend. Note that the class
 \code{Expression} is that devoted to \Sage{} symbolic expressions.
 The method \code{expr()} can also be invoked to get the expression in
-another symbolic engine, for instance \soft{SymPy}:
+another symbolic backend, for instance \soft{SymPy}:
 \begin{NBin}
 fU.expr('sympy')
 \end{NBin}
@@ -596,7 +596,7 @@ fU._express
 \left\{\texttt{SR} : \frac{1}{x^{2} + y^{2} + 1},
 \texttt{sympy}: \mbox{\texttt{1/(x**2 + y**2 + 1)}}\right\}
 \end{NBoutM}
-The default calculus engine for chart functions of chart \code{XU} can
+The default calculus backend for chart functions of chart \code{XU} can
 changed thanks to the method \code{set\_calculus\_method()}:
 \begin{NBin}
 XU.set_calculus_method('sympy')
@@ -938,15 +938,15 @@ def _add_(self, other):
 File: .../local/lib/python2.7/site-packages/sage/manifolds/chart_func.py
 \end{lstlisting}
 We notice that the addition is performed in line~14 on the symbolic expression
-with respect to the symbolic engine currently at work (\Sage{}/\soft{Pynac}, \soft{SymPy}, ...), as returned by
+with respect to the symbolic backend currently at work (\Sage{}/\soft{Pynac}, \soft{SymPy}, ...), as returned by
 the method \code{expr()} (see Sec.~\ref{s:man:def_scalar}).
-Let us recall that the user can change the symbolic engine at any time
+Let us recall that the user can change the symbolic backend at any time
 by means of the method \code{set\_calculus\_method()}, applied either to
 a chart or to an open subset (possibly \code{M} itself).
 Besides, we notice on line~14 above that the result of the symbolic addition
 is automatically simplified, by means of the method \code{\_simplify}.
 The latter invokes a chain of simplifying functions, which depends on the
-symbolic engine.\footnote{See
+symbolic backend.\footnote{See
 \url{https://github.com/sagemath/sage/blob/develop/src/sage/manifolds/utilities.py}
 for details; note that the simplifications regarding the \soft{SymPy} engine are not
 fully implemented yet.}
