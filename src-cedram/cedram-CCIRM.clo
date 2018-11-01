@@ -1,0 +1,340 @@
+%% Version du 08-12-2008
+%% M{\'e}tadonn{\'e}es
+% titre de la s{\'e}rie
+\def\currentjournaltitle{Les cours du CIRM}
+% entit{\'e} {\'e}ditrice du journal 
+\edef\currentjournalpublisher{CIRM}
+% titre abr{\'e}g{\'e} du journal
+\def\currentjournalshorttitle{Cours du CIRM}
+% acronyme
+\def\cdr@journalacro{CCIRM}
+% ISSN
+%\ISSN{2108-7164}
+\eISSN{2108-7164}
+%
+\CDRjournalURL{ccirm}
+\def\cdr@resprole{organisateur}
+%
+%% g{\'e}om{\'e}tries
+\paperwidth=210mm
+\paperheight=297mm
+%% si DVI -> PS -> PDF
+%\ifcdr@HTML
+\def\cdr@dvipsoptions{ -T210mm,297mm }%
+%\fi
+\ifx\undefined\pdfpagewidth\else
+\pdfpagewidth\paperwidth
+\pdfpageheight\paperheight
+\fi
+%% Param{\`e}tres de mise en page
+% styles
+\cdr@uppercaseheadtitlesfalse
+\cdr@uppercaseheadauthorsfalse
+% dimensions
+\setlength\headheight{12\p@}
+\setlength\headsep   {25\p@}
+\setlength{\textwidth}{15cm}
+% size12.clo arrondi cette longueurs en pt :
+\@settopoint\textwidth
+\setlength{\textheight}{23.5cm}
+\@settopoint\textheight
+\setlength{\oddsidemargin}{.46cm}
+\setlength{\evensidemargin}{.46cm}
+\setlength\topmargin{\paperheight}
+\addtolength\topmargin{-2.5in}
+\addtolength\topmargin{-\headheight}
+\addtolength\topmargin{-\headsep}
+\addtolength\topmargin{-\textheight}
+\addtolength\topmargin{-\footskip}     % this might be wrong!
+\addtolength\topmargin{-.5\topmargin}%coef de centrage vertical
+\@settopoint\topmargin
+\setlength\footskip{40\p@}
+% fin de l'ajustement de page layout inspire de size12.clo
+\setlength{\abovedisplayskip}{14pt}
+\setlength{\belowdisplayskip}{14pt}
+\setlength{\abovedisplayshortskip}{14pt}
+\setlength{\belowdisplayshortskip}{14pt}
+%% 1re page
+\pagenumbering{arabic}%
+% style des flottants
+\def\@captionheadfont{\normalfont}
+\def\@captionfont{\normalfont}
+\def\captionseparator{:}
+%% style des r{\'e}sum{\'e}s
+%\def\cdr@preabstracthook{%
+%   \vskip 0pt
+% }
+\abstractmargin1cm
+\def\abstractheadfont{\small\bfseries}
+\def\abstractfont{\small}
+\def\alttitlefont{\large\itshape}
+\def\@setabstracthead{\nobreak\vskip18pt{\centering\abstractheadfont\abstractname\par}%
+	\item\relax\hspace*{\normalparindent}\ignorespaces}
+\def\@setaltabstracthead{%
+  \ifx\@alttitle\@empty\else
+  \vskip16pt
+  \begin{minipage}{\linewidth}
+    \centering\alttitlefont\@alttitle
+  \end{minipage}\fi
+\nobreak\vskip8pt
+{\centering\abstractheadfont\altabstractname\par}%
+	\item\relax\hspace*{\normalparindent}\ignorespaces}%
+\if@francais
+% on sait pas !
+\else
+\def\@setabstract@first{\@setaltabstract}
+\def\@setabstract@last{\@setabstract}
+\fi
+%% Mention de copyright
+\def\@setcopyright{}%
+\def\TheExp{%
+  \ifnum\c@article>\z@\Roman{article}\fi}
+\def\ThePage{%
+  \ifnum\c@article>\z@\TheExp--\fi\thepage}
+\def\Coursname{\if@francais Cours\else Course\fi}
+\def\ps@plain{\ps@empty
+  \def\@evenhead{%
+    \normalfont%
+    \hfil
+    \def\thanks{\protect\thanks@warning}%
+    {\small\scshape\leftmark}\hfil}%
+  \def\@oddhead{%
+    \setTrue{runhead}%
+    \normalfont \hfil
+    \def\thanks{\protect\thanks@warning}%
+    {\small\ifnum\c@article>\z@ \Coursname\ \no\TheExp --- \fi\itshape\rightmark}\hfil}%    
+  \def\@oddfoot{\normalfont\hfil\ThePage\hfil}%
+  \let\@evenfoot\@oddfoot}
+%% pour les Recup
+\def\ps@headingsRecup{\ps@plain%\ps@empty
+  \def\@evenhead{%
+    \normalfont%
+    \hfil
+    \def\thanks{\protect\thanks@warning}%
+    {\small\scshape\leftmark}\hfil}%
+  \def\@oddhead{%
+    \setTrue{runhead}%
+	\ifnum\c@page=1\@serieslogo\hss\else
+    \normalfont \hfil
+    \def\thanks{\protect\thanks@warning}%
+    {\small\ifnum\c@article>\z@ Cours \no\TheExp --- \fi\itshape\rightmark}\hfil\fi}%    
+}
+%% Style de la premi{\`e}re page
+\newif\ifcdr@setCIRMconf\cdr@setCIRMconftrue
+\def\NoConfInfo{\cdr@setCIRMconffalse}
+\def\ps@firstpageheadings{\ps@empty
+  \def\@oddhead{\@serieslogo\hss}%
+  \let\@evenhead\@oddhead % in case an article starts on a left-hand page
+}
+\ifcdr@recup
+%\pagestyle{headings}%
+\includepdfset{pages={-},noautoscale,pagecommand={\thispagestyle{headingsRecup}}}
+\else
+\pagestyle{plain}%
+\fi
+%% Style de la premi{\`e}re page
+\def\ps@firstpage{\ps@plain
+      \def\@oddfoot{\hfil\ThePage\hfil
+\global\topskip\normaltopskip}%
+        \let\@evenfoot\@oddfoot
+  \def\@oddhead{\@serieslogo\hss}%
+  \let\@evenhead\@oddhead % in case an article starts on a left-hand page
+}%
+%% Identification article premi{\`e}re page
+%\logoheight6pt
+\def\@logofont{\small}
+\def\article@logo{%
+  \set@logo{%
+    {\publname}\\
+    \ifx\@empty\currentvolume \textbf{Version de travail}
+     \else Vol.~\textbf{\currentvolume} \no\currentissue\ (\currentyear) \pageinfo
+     \fi\ifnum\c@article>\z@\\ Cours \no\TheExp\fi
+  }%
+}
+%
+%% Pr{\'e}sentation du titre
+\def\@settitle{%
+  \begin{center}%
+    \ifcdr@sommaire
+      \vspace*{-50pt}
+    \else
+      \vspace*{20pt}
+    \fi
+    \Huge
+%    \bfseries
+    \@title
+  \end{center}%
+}
+%% Pr{\'e}sentation des auteurs
+\if@francais
+\def\@@and{et}%
+ \else
+\def\@@and{and}%
+\fi
+\def\@setauthors{%
+  \begingroup
+  \def\thanks{\protect\thanks@warning}%
+  \trivlist
+  \centering\@topsep30\p@\relax
+  \advance\@topsep by -\baselineskip
+  \item\relax
+  \author@andify\authors
+  \def\\{\protect\linebreak}%
+  \let\lastname\textsc	
+  {\authors}%
+  \ifx\@empty\contribs
+  \else
+    ,\penalty-3 \space \@setcontribs
+    \@closetoccontribs
+  \fi
+  \endtrivlist
+  \endgroup
+}
+%% Th{\'e}or{\`e}mes
+\let\cdr@thmdefsSAVED\cdr@thmdefs
+\let\cdr@enoncedefSAVED\cdr@enoncedef
+\let\cdr@thmeqsSAVED\cdr@thmeqs
+\xdef\cdr@thmdefs{}
+\xdef\cdr@enoncedef{}
+\xdef\cdr@thmeqs{}
+\def\UseThmDefs{%
+\let\cdr@thmdefs\cdr@thmdefsSAVED
+\let\cdr@enoncedef\cdr@enoncedefSAVED
+\let\cdr@thmeqs\cdr@thmeqsSAVED
+}
+%% adresses en fin
+\def\@setaddresses{\par
+  \nobreak \begingroup
+\footnotesize
+  \def\author##1{\par\nobreak\addvspace\bigskipamount}%
+  \def\noauthor##1{\par\nobreak\addvspace\bigskipamount}%
+  \def\\{\unskip, \ignorespaces}%
+  \interlinepenalty\@M
+  \def\address##1##2{\begingroup
+    \par\addvspace\bigskipamount\indent
+    \@ifnotempty{##1}{(\ignorespaces##1\unskip) }%
+    {\ignorespaces##2}\space\endgroup}%
+  \def\curraddr##1##2{\begingroup
+    \@ifnotempty{##2}{\nobreak\indent\curraddrname
+      \@ifnotempty{##1}{\textbullet\ \ignorespaces##1\unskip}\/:\space
+      ##2\space}\endgroup}%
+  \def\email##1##2{\begingroup
+    \@ifnotempty{##2}{\textbullet\ 
+      \@ifnotempty{##1}{\ignorespaces##1\unskip\/:\space}
+      \href{mailto:##2}{##2}\space}\endgroup}%
+  \def\urladdr##1##2{\begingroup
+    \@ifnotempty{##2}{\textbullet\ 
+      \@ifnotempty{##1}{\ignorespaces##1\unskip\/:\space}
+      \url{##2}\space}\endgroup}%
+  \addresses
+  \endgroup
+}
+\long\def\@footnotetextFLUSH#1{{\def\@makefntext{}\normalparindent\z@\@footnotetext{#1}}}
+\def\@adminfootnotes{%
+  \let\@makefnmark\relax  \let\@thefnmark\relax
+  \ifcdr@setCIRMconf
+  \ifx\cdr@conftitle@french\@empty\else\@footnotetextFLUSH{\@setCIRMconf}\fi
+  \fi
+  \ifx\@empty\@date\else \@footnotetextFLUSH{\@setdate}\fi
+  \ifx\@empty\@subjclass\else \@footnotetextFLUSH{\@setsubjclass}\fi
+  \ifx\@empty\@keywords\else \@footnotetextFLUSH{\@setkeywords}\fi
+  \ifx\@empty\thankses\else \@footnotetextFLUSH{%
+    \def\par{\let\par\@par}\@setthanks}%
+  \fi
+}
+\def\@setCIRMconf{%
+  \if@francais Cours profess\'e lors de la rencontre \og
+  \cdr@conftitle@french \fg{} organis\'ee par \cdr@resps. \currentlocation, C.I.R.M. (Luminy).\else
+  Course taught during the meeting ``\cdr@conftitle@french''
+  organized by \cdr@resps. \currentlocation, C.I.R.M. (Luminy).\fi}
+%% Page de garde
+\definecolor{fond}{rgb}{1,1,.6}% 
+\definecolor{textecouv}{rgb}{.1,0,.5}% 
+\def\@makePagedeGarde{%
+\ifcdr@pagedegarde
+{\makeatletter\input{CCIRM-pagedegarde}}%
+\newpage\ifcdr@HTML\pagecolor{white}\else\gdef\GPT@pageliteral{}\fi
+\fi}
+\ifcdr@volume
+%\AtBeginDocument{\xdef\cdrsom@out@filename{\CDRidvol.cdrsom}}
+\def\maketitle{%\@makePDFinfo
+  \def\cdrsom@out@filename{\cdr@idvol.cdrsom}%
+  \@makeSOM}
+\def\enddoc@text{}
+
+%% preface, etc.
+\def\includeprearticle{\@ifnextchar[\@includeprearticle{\@includeprearticle[]}}
+
+\def\@includeprearticle[#1]#2{%
+  \setkeys{cdr@inclart}{#1}%
+  \cleardoublepage
+  \setpage{1}%
+  \tkkp={\setpage[roman]}%
+%  \addtocounter{article}{1}%
+  \IncludeArticle[2]{#2/}{#2}%
+\ifcdr@XML
+  \immediatelywrite@shell{cd #2 && \cdr@tralics@com #2-cdrxml}%
+    \ifx\@empty\articlesXML
+    \gdef\articlesXML{#2/#2-cdrxml.xml}%
+  \else
+    \g@addto@macro\articlesXML{ #2/#2-cdrxml.xml}%
+  \fi
+\fi
+  \ifx\@empty\articlesSOM
+    \gdef\articlesSOM{#2/#2.cdrsom}%
+   \else
+    \g@addto@macro\articlesSOM{ #2/#2.cdrsom}%
+   \fi
+   \gdef\cdr@inclart{}%
+}
+\def\@includearticle[#1]#2{%
+  \setkeys{cdr@inclart}{#1}%
+  \cleardoublepage
+  \setpage{1}%
+  \tkkp={\setpage}%
+  \addtocounter{article}{1}%
+  \IncludeArticle[2]{#2/}{#2}%
+\ifcdr@XML
+  \immediatelywrite@shell{cd #2 && \cdr@tralics@com #2-cdrxml}%
+    \ifx\@empty\articlesXML
+    \gdef\articlesXML{#2/#2-cdrxml.xml}%
+  \else
+    \g@addto@macro\articlesXML{ #2/#2-cdrxml.xml}%
+  \fi
+\fi
+  \ifx\@empty\articlesSOM
+    \gdef\articlesSOM{#2/#2.cdrsom}%
+   \else
+    \g@addto@macro\articlesSOM{ #2/#2.cdrsom}%
+   \fi
+   \gdef\cdr@inclart{}%
+}
+\def\articles{%
+    \cleardoublepage
+    \pagenumbering{arabic}%
+    \setcounter{page}{1}%
+    \setcounter{article}{0}%
+}
+\else
+  \let\cdr@shortresps\@empty
+  \let\cdr@resps\@empty
+  \let\cdr@conftitle@french\@empty
+  \let\cdr@conftitle@english\@empty
+  \let\cdr@confabstract@french\@empty
+  \let\cdr@confabstract@english\@empty
+\AtBeginDocument{%
+\begingroup\makeatletter
+\newcommand\SomLine[9]{%
+  \gdef\cdr@shortresps{#1}%
+  \gdef\cdr@resps{#2}%
+  \gdef\cdr@conftitle@french{#5}%
+  \gdef\cdr@conftitle@english{#4}%
+  \gdef\cdr@confabstract@french{#7}%
+  \gdef\cdr@confabstract@english{#6}%
+  }%
+\InputIfFileExists{../\CDRidvol.cdrsom}{%
+\message{** Fichier  \CDRidvol.cdrsom charg\'e pour
+  cet article **^^J}}{%
+\message{** Pas de fichier \CDRidvol.cdrsom  pour ce volume !**^^J}}%
+\makeatother\endgroup}
+\fi

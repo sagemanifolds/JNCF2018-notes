@@ -1,0 +1,62 @@
+\thispagestyle{empty}
+\addtocounter{page}{-2}
+\enlargethispage{2cm}
+\begingroup
+\pagecolor{fond}
+\frenchspacing
+\def\UrlFont{\sffamily\color[gray]{.4}}
+\url@sfstyle
+\DeclareRobustCommand*{\staburl}{\hyper@normalise\staburl@}
+\def\staburl@#1{\hyper@linkurl{\color{blue}\Hurl{#1}}{#1}}
+\parindent0pt
+\strut\kern-6mm\raisebox{-35mm}[0pt][0pt]{\includegraphics[width=4cm]{logo-cirm}}\\*[4.5cm]
+\begin{center}
+\color{textecouv}
+\ifx\cdr@conftitle@french\@empty\else
+{\Huge \itshape \cdr@conftitle@french\\[24pt]}\fi
+\ifx\cdr@resps\@empty\else
+\begin{otherlanguage}{french}\def\@@and{et}%
+  \textsc{Rencontre organis\'ee par :}\\
+  \Large \cdr@resps
+\end{otherlanguage}
+\\[18pt]\fi
+\currentmonth\ \currentyear
+\end{center}
+
+\vspace*{2.5cm}
+
+\begin{flushleft}
+  \begingroup
+  \author@andify\authors
+  {\large\ignorespaces\authors\unskip}%
+  \\[4pt]
+  \begin{hyphenrules}{nohyphenation}%
+    \def\\{\allowbreak}
+    \textbf{\ignorespaces\@title\unskip}\par
+  \end{hyphenrules}
+  \endgroup
+\end{flushleft}
+\normalsize
+\ifx\currentvolume\@empty\else
+Vol.~\currentvolume\fi\ifx\currentissue\@empty\else,
+\no\currentissue\fi\
+(\currentyear), \ifnum\c@article>\z@ \Coursname\ \no\TheExp, \fi
+p.~\cdr@start@page-\cdr@end@page.\\[6pt]
+\normalsize%\sf
+<\staburl{\journalURL item?id=\CDRidart}> \vfill
+\begin{center}
+{\Large
+Centre international de rencontres math\'ematiques\\
+\large
+U.M.S. 822 C.N.R.S./S.M.F.\\
+Luminy (Marseille) \textsc{France}\\[2pt]}
+\vskip0pt plus.4fill
+\href{\CDRbaseURL}{\includegraphics{logocedram}}\\
+ \small{\usefont{T1}{ptm}{m}{it}Texte mis en ligne dans le cadre du\\
+  Centre de diffusion des revues acad\'emiques de math\'ematiques}\\
+\url{\CDRbaseURL}\\[10mm]
+\end{center}
+\endgroup
+%\pagebreak
+\cleardoublepage
+\endinput

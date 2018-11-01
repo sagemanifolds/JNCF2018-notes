@@ -224,7 +224,7 @@ line/.style = {->, draw, thick, >=triangle 45}
 \subtitle{A SageMath implementation}
 \author{\firstname{Éric} \lastname{Gourgoulhon}}
 \address{Laboratoire Univers et Théories \\
-CNRS / Observatoire de Paris / Université Paris Diderot\\
+CNRS, Observatoire de Paris, Université Paris Diderot,
 Université Paris Sciences et Lettres \\
 92190 Meudon, France}
 \email{eric.gourgoulhon@obspm.fr}
@@ -236,13 +236,12 @@ Université Paris Sciences et Lettres \\
 \setcounter{minitocdepth}{1}
 \dominitoc
 
+\input pre.tex  % Preface
+
 \newpage
-
-\include{pre}  % Preface
-
 \tableofcontents
 
-\setcounter{mtc}{1}
+%\setcounter{mtc}{0}
 
 \include{int}  % Introduction
 
