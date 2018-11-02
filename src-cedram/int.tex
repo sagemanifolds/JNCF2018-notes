@@ -4,9 +4,9 @@
 
 \section{What is tensor calculus on manifolds?}
 
-Let us outline briefly what is meant by
-\emph{tensor calculus on manifolds}, defering the precise definitions of the involved mathematical objects to Chaps.~\ref{s:man} and~\ref{s:vec}.
-Basically, one considers calculus on vector fields,
+We shall provide precise definitions in
+Chaps.~\ref{s:man} and~\ref{s:vec}. Here, let us state briefly that
+\emph{tensor calculus on manifolds} stands for calculus on vector fields,
 and more generally tensor fields, on differentiable manifolds, involving the following operations~\cite{Lee13}:
 \begin{itemize}
 \item arithmetics of tensor fields;
@@ -14,7 +14,7 @@ and more generally tensor fields, on differentiable manifolds, involving the fol
 \item (anti)symmetrization;
 \item Lie derivation along vector fields;
 \item pullback and pushforward associated with smooth manifold maps;
-\item exterior calculus on differential forms;
+\item exterior (Cartan) calculus on differential forms;
 \item covariant derivation with respect to a given affine connection;
 \item evaluating the torsion and the curvature of an affine connection.
 \end{itemize}
@@ -45,7 +45,7 @@ while the computation with \soft{ALAM} took 4 minutes and yielded the
 discovery of 6 errors in the original paper by Bondi et al.
 Since then, numerous packages have been developed; the reader is referred to~\cite{MacCa18}
 for a recent review of computer algebra
-systems for general relativity (see also \cite{MacCa02} for packages prior to 2002), and to~\cite{KorolKS13,BirkaGSC17} for more recent reviews
+systems for general relativity (see also \cite{MacCa02} for a review up to 2002), and to~\cite{KorolKS13,BirkaGSC17} for more recent reviews
 focused on tensor calculus.
 It is also worth to point out the extensive list of
 tensor calculus packages maintained by J. M. Martin-Garcia at
@@ -71,7 +71,7 @@ and
 \item Standalone applications. Recent examples are \soft{Cadabra}~\cite{Peete07} (field theory),
 \soft{SnapPy}~\cite{snappy} (topology and geometry of 3-manifolds)  and
 \soft{Redberry}~\cite{BolotP13} (tensors); older examples can be found in
-Ref.~\cite{MacCa02}.
+Refs.~\cite{MacCa02,MacCa18}.
 \end{enumerate}
 All applications listed in the second category are free software. In
 the first category, \soft{xAct} and \soft{Ricci} are also free software, but
@@ -95,7 +95,7 @@ in a given frame.
 \section{A brief overview of SageMath} \label{s:int:overview_Sage}
 
 Since the tensor calculus method presented here is implemented in \Sage{}, we
-give first a brief overview of it.
+give first a brief overview of the latter.
 
 \Sage{}\footnote{\url{http://www.sagemath.org}} is a free, open-source mathematics software system, which is
 based on the Python programming language. It makes use of over 90 open-source packages,
@@ -106,15 +106,17 @@ among which are \soft{Maxima}, \soft{Pynac} and \soft{SymPy} (symbolic calculati
 \Sage{} provides a uniform Python interface to all these packages; however,
 \Sage{} is much more than a mere interface: it contains a large and increasing part of
 original code (more than 750,000 lines of Python and Cython, involving 5344 classes).
-\Sage{} was created in 2005 by W.~Stein~\cite{SteinJ05} and since
+\Sage{} was created in 2005 by William Stein~\cite{SteinJ05} and since
 then its development has been sustained by more than a hundred researchers
-(mostly mathematicians). Very good introductory textbooks about \Sage{} are
+(mostly mathematicians). In particular, a strong impulse is currently being
+provided by the European Horizon 2020 project OpenDreamKit~\cite{OpenDreamKit}.
+Very good introductory textbooks about \Sage{} are
 \cite{JoyneS14,Zimme13,Zimme18,Bard15}.
 
 Apart from the syntax, which is based on a popular programming language
-(Python) and not some custom script
+(Python) and not on some custom script
 language, a difference between \Sage{} and, e.g., \soft{Maple} or \soft{Mathematica}
-is the use of the \emph{parent/element pattern}\index{parent}\index{element}. This framework more closely
+is the use of the \emph{parent/element pattern}\index{parent}\index{element}. This pattern closely
 reflects actual mathematics.
 For instance, in \soft{Mathematica}, all objects
 are trees of symbols and the program is essentially a set of
@@ -156,7 +158,7 @@ performed via the \soft{SageManifolds} project:
 \begin{center}
 \url{https://sagemanifolds.obspm.fr},
 \end{center}
-the full list of contributors being available at
+the contributors to which are listed at
 \begin{center}
 \url{https://sagemanifolds.obspm.fr/authors.html}.
 \end{center}

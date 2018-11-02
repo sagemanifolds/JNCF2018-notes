@@ -42,14 +42,13 @@ from the page devoted to these lectures:
 \end{center}
 As for all \Sage{}, the syntax used in this notebook is \soft{Python} one. However, no
 a priori knowledge of \soft{Python} is required, since we shall explain the
-main notations as they appear.
-
-In \Sage{}, manifolds are constructed by means of the global function \code{Manifold}:
-
+main notations as they appear. The first cell of the Jupyter notebook is to have
+all outputs rendered with \LaTeX:
 \begin{NBin}
 %display latex
 \end{NBin}
-
+\ \\
+In \Sage{}, manifolds are constructed by means of the global function \code{Manifold}:
 \begin{NBin}
 M = Manifold(2, 'M')
 print(M)
@@ -69,10 +68,13 @@ Note the use of the standard object-oriented notation (ubiquitous in
 since this method does not require any extra argument (all the information lies
 in \code{M}), its argument list is empty, hence the final \code{()}.
 Base fields different from $\mathbb{R}$
-must be specified with the optional keyword \code{field}, like
+must be specified with the optional keyword \code{field}, for instance
 \begin{flushleft}
 \code{M = Manifold(2, 'M', field='complex')}
 \end{flushleft}
+to construct a complex manifold\footnote{Note however that the functionalities
+regarding complex manifolds are pretty limited at the moment. Volunteers are
+welcome to implement them! See \url{https://sagemanifolds.obspm.fr/contrib.html}.}.
 We may check that $M$ is a topological space:
 \begin{NBin}
 M in Sets().Topological()
@@ -95,8 +97,11 @@ As we can see from the first category in the above list, \code{Manifold}
 constructs a smooth manifold by default.
 If one would like to stick to the topological level, one should add
 the keyword argument \code{structure='topological'} to \code{Manifold},
-i.e.\ \code{M = Manifold(2, 'M', structure='topological')}: $M$ would have
-been a topological manifold without any further structure.
+i.e.
+\begin{flushleft}
+\code{M = Manifold(2, 'M', structure='topological')}
+\end{flushleft}
+Then $M$ would have been a topological manifold without any further structure.
 
 \begin{figure}
 \begin{center}
@@ -107,7 +112,6 @@ Python classes for topological
 manifolds, differentiable manifolds, subsets of them
 and points on them (\code{ManifoldPoint}).}
 \end{figure}
-
 
 Manifolds are implemented by the Python classes \code{TopologicalManifold}
 and \\ \code{DifferentiableManifold} (see Fig.~\ref{f:man:domain_classes}),
@@ -122,8 +126,8 @@ type(M)
         DifferentiableManifold_with_category'>
 \end{verbatim}
 \end{NBout}
-Notice that the actual class of \code{M} is \code{DifferentiableManifold-with-category}.
-It is a subclass of \code{DifferentiableManifold}:
+Let us check that the actual class of \code{M}, i.e.\ \code{DifferentiableManifold-with-category},
+is a subclass of \code{DifferentiableManifold}:
 \begin{NBin}
 isinstance(M,
            sage.manifolds.differentiable.manifold.DifferentiableManifold)
@@ -139,7 +143,8 @@ isinstance(M, sage.manifolds.manifold.TopologicalManifold)
 \begin{NBout}
 \texttt{True}
 \end{NBout}
-Notice that \code{TopologicalManifold} itself is a subclass of \code{ManifoldSubset} (the class
+Notice from Fig.~\ref{f:man:domain_classes} that
+\code{TopologicalManifold} itself is a subclass of \code{ManifoldSubset} (the class
 for generic subsets of a manifold), which reflects the fact that $M\subset M$.
 
 \subsection{Coordinate charts} \label{s:man:coord_chart}
@@ -535,7 +540,7 @@ to various computational backends:
 \begin{itemize}
 \item \Sage{} symbolic engine, based on the \soft{Pynac}\footnote{\url{http://pynac.org}}\index{Pynac} backend, with \soft{Maxima} used for some simplifications
 or computation of integrals;
-\item \soft{SymPy}\footnote{\url{http://www.sympy.org}}\index{SymPy} (Python library for symbolic mathematics);
+\item \soft{SymPy}\footnote{\url{https://www.sympy.org}}\index{SymPy} (Python library for symbolic mathematics);
 \item in the future, more symbolic or numerical backends will be implemented.
 \end{itemize}
 The coordinate expressions are stored in the private dictionary \code{\_express}\footnote{not to be confused with

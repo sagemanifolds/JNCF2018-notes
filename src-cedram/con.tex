@@ -7,18 +7,18 @@ scalar fields), the latter being involved only in the last stage of the diagram
 shown in Fig.~\ref{f:vec:storage_tensor}.
 
 The implementation has been performed via the \soft{SageManifolds}
-project, the home page of which we refer for details and material complementary
+project, the home page of which we refer to for details and material complementary
 to what has been shown here (in particular many more examples):
 \begin{center}
 \url{https://sagemanifolds.obspm.fr/}
 \end{center}
-This project resulted in approximately $75,000$ lines of Python code (including comments and doctests), which have been submitted to \Sage{} community as a sequence of
-33 tickets,\footnote{Cf.\ the meta-ticket \url{https://trac.sagemath.org/ticket/18528}.}
-at the time of this writing (March 2018). The
-first ticket was accepted in March 2015 and the 33th one in March 2018.
+This project resulted in approximately $85,000$ lines of Python code (including comments and doctests), which have been submitted to \Sage{} community as a sequence of
+$\sim 50$ tickets\footnote{Cf.\ the meta-ticket \url{https://trac.sagemath.org/ticket/18528}.}
+at the time of this writing (October 2018), the
+first ticket having been accepted in March 2015.
 These tickets have been written and reviewed by a dozen of
 contributors.\footnote{Cf.\ the list at \url{https://sagemanifolds.obspm.fr/authors.html}.}
-As a result, all code is fully included in \soft{SageMath~8.2} and does not require
+As a result, all code is fully included in \soft{SageMath~8.4} and does not require
 any separate installation. The following features have been already implemented:
 \begin{itemize}
 \item differentiable manifolds: tangent spaces, vector frames, tensor fields, curves, pullback and pushforward operators;
@@ -32,12 +32,14 @@ Hodge duality;
 \item pseudo-Riemannian metrics;
 \item computation of geodesics (numerical integration via \Sage{}/\soft{GSL});
 \item some plotting capabilities (charts, points, curves, vector fields);
+\item extrinsic geometry of pseudo-Riemannian submanifolds;
 \item parallelization (on tensor components) of CPU demanding computations,
 via the Python library \code{multiprocessing};
 \item the possibility to use \soft{SymPy} as the symbolic backend, instead of
 \Sage{}'s default, which is \soft{Pynac} (with \soft{Maxima} for simplifications).
 \end{itemize}
-Only a subset of the above functionalities have been presented here. In particular,
+Only a subset of the above functionalities have been presented in these lectures.
+In particular,
 the exterior calculus on differential forms and multivector fields has not been
 touched, nor the computation of geodesics.
 
@@ -46,7 +48,6 @@ touched, nor the computation of geodesics.
 The \soft{SageManifolds} project is still ongoing and future prospects include
 \begin{itemize}
 \item adding more symbolic backends (\soft{Giac}, \soft{FriCAS}, ...);
-\item treating the extrinsic geometry of pseudo-Riemannian submanifolds;
 \item computing integrals on submanifolds;
 \item adding more plotting capabilities;
 \item introducing new functionalities: symplectic forms, fibre bundles,
