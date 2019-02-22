@@ -21,6 +21,7 @@ df
 \begin{NBoutM}
 \mathrm{d}f
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 print(df)
 \end{NBin}
@@ -51,6 +52,7 @@ eU.dual_basis()
 \begin{NBoutM}
 \left(U, \left(\mathrm{d} x,\mathrm{d} y\right)\right)
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 print(eU.dual_basis()[0])
 \end{NBin}
@@ -74,6 +76,7 @@ df[0] == diff(f.expr(), x)
 \begin{NBout}
 \texttt{True}
 \end{NBout}
+\vspace*{-\baselineskip}
 \begin{NBin}
 df[1] == diff(f.expr(), y)
 \end{NBin}
@@ -109,6 +112,7 @@ df[eV,0,XV] == diff(f.expr(XV), xp)
 \begin{NBout}
 \texttt{True}
 \end{NBout}
+\vspace*{-\baselineskip}
 \begin{NBin}
 df[eV,1,XV] == diff(f.expr(XV), yp)
 \end{NBin}
@@ -127,6 +131,7 @@ Module Omega^1(M) of 1-forms on the 2-dimensional differentiable manifold M
 \begin{NBoutM}
 \Omega^{1}\left(M\right)
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 df.parent().base_ring()
 \end{NBin}
@@ -170,18 +175,37 @@ t
 \begin{NBoutM}
 \mbox{Tensor field of type (1,1) on the 2-dimensional differentiable manifold M}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 t.display()
 \end{NBin}
 \begin{NBoutM}
-v\otimes \mathrm{d}f = \left( -\frac{2 \, x}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} x + \left( -\frac{2 \, y}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} y + \left( \frac{4 \, x}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} x + \left( \frac{4 \, y}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} y
+\begin{aligned}[t]
+v\otimes \mathrm{d}f = &\left( -\frac{2 \, x}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} x\\
+&+ \left( -\frac{2 \, y}{x^{6} + y^{6} + 3 \, {\left(x^{2} + 1\right)} y^{4} + 3 \, x^{4} + 3 \, {\left(x^{4} + 2 \, x^{2} + 1\right)} y^{2} + 3 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} y \\
+&+ \left( \frac{4 \, x}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} x \\
+&+ \left( \frac{4 \, y}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial y }\otimes \mathrm{d} y
+\end{aligned}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 t.display(eV)
 \end{NBin}
 \begin{NBoutM}
-v\otimes \mathrm{d}f = \left( -\frac{2 \, {\left({x'}^{5} - 4 \, {x'}^{2} {y'}^{3} - {x'} {y'}^{4} - 4 \, {\left({x'}^{4} + {x'}^{2}\right)} {y'}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {x'} }\otimes \mathrm{d} {x'} + \left( -\frac{2 \, {\left({x'}^{4} {y'} - 4 \, {x'} {y'}^{4} - {y'}^{5} - 4 \, {\left({x'}^{3} + {x'}\right)} {y'}^{2}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {x'} }\otimes \mathrm{d} {y'} + \left( -\frac{4 \, {\left({x'}^{5} + {x'}^{4} {y'} + {x'}^{2} {y'}^{3} - {x'} {y'}^{4} + {x'}^{3} - {x'} {y'}^{2}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {y'} }\otimes \mathrm{d} {x'} + \left( -\frac{4 \, {\left({x'}^{3} {y'}^{2} + {x'} {y'}^{4} - {y'}^{5} - {y'}^{3} + {\left({x'}^{4} + {x'}^{2}\right)} {y'}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {y'} }\otimes \mathrm{d} {y'}
+\textstyle
+\begin{aligned}[t]
+v\otimes \mathrm{d}f =
+& \left( -\frac{2 \, {\left({x'}^{5} - 4 \, {x'}^{2} {y'}^{3} - {x'} {y'}^{4} - 4 \, {\left({x'}^{4} + {x'}^{2}\right)} {y'}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {x'} }\otimes \mathrm{d} {x'} \\
+&+ \left( -\frac{2 \, {\left({x'}^{4} {y'} - 4 \, {x'} {y'}^{4} - {y'}^{5} - 4 \, {\left({x'}^{3} + {x'}\right)} {y'}^{2}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {x'} }\otimes \mathrm{d} {y'}
+\end{aligned}
 \end{NBoutM}
+\[
+\begin{aligned}
+\phantom{v\otimes \mathrm{d}f}
+&+ \left( -\frac{4 \, {\left({x'}^{5} + {x'}^{4} {y'} + {x'}^{2} {y'}^{3} - {x'} {y'}^{4} + {x'}^{3} - {x'} {y'}^{2}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {y'} }\otimes \mathrm{d} {x'} \\
+&+ \left( -\frac{4 \, {\left({x'}^{3} {y'}^{2} + {x'} {y'}^{4} - {y'}^{5} - {y'}^{3} + {\left({x'}^{4} + {x'}^{2}\right)} {y'}\right)}}{{x'}^{6} + {y'}^{6} + 3 \, {\left({x'}^{2} + 1\right)} {y'}^{4} + 3 \, {x'}^{4} + 3 \, {\left({x'}^{4} + 2 \, {x'}^{2} + 1\right)} {y'}^{2} + 3 \, {x'}^{2} + 1} \right) \frac{\partial}{\partial {y'} }\otimes \mathrm{d} {y'}
+\end{aligned}
+\]
 We can use the method \code{display\_comp()} for a display component by
 component:
 \begin{NBin}
@@ -204,6 +228,7 @@ differentiable manifold M
 \begin{NBoutM}
 \mathcal{T}^{(1,1)}\left(M\right)
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 t.parent().base_ring()
 \end{NBin}
@@ -285,6 +310,7 @@ g[0,0].factor(); g[1,1].factor()
 \begin{NBoutM}
 \frac{4}{{\left(x^{2} + y^{2} + 1\right)}^{2}}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 g.display()
 \end{NBin}
@@ -317,12 +343,14 @@ print(g(v,v))
 \begin{NBprint}
 Scalar field g(v,v) on the 2-dimensional differentiable manifold M
 \end{NBprint}
+\vspace*{-\baselineskip}
 \begin{NBin}
 g(v,v).parent()
 \end{NBin}
 \begin{NBoutM}
 C^{\infty}\left(M\right)
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 g(v,v).display()
 \end{NBin}
@@ -361,6 +389,7 @@ print(Dv)
 Tensor field nabla_g(v) of type (1,1) on the 2-dimensional differentiable
 manifold M
 \end{NBprint}
+\vspace*{-\baselineskip}
 \begin{NBin}
 Dv.display()
 \end{NBin}
@@ -387,6 +416,7 @@ Riem.display()
 Tensor field Riem(g) of type (1,3) on the 2-dimensional differentiable
 manifold M
 \end{NBprint}
+\vspace*{-\baselineskip}
 \begin{NBout}
 $\displaystyle
 \mathrm{Riem}\left(g\right) = \left( \frac{4}{x^{4} + y^{4} + 2 \, {\left(x^{2} + 1\right)} y^{2} + 2 \, x^{2} + 1} \right) \frac{\partial}{\partial x }\otimes \mathrm{d} y\otimes \mathrm{d} x\otimes \mathrm{d} y $\\
@@ -469,6 +499,8 @@ Ric == (R/2)*g
 \begin{NBout}
 \texttt{True}
 \end{NBout}
+
+\vspace*{-1.1\baselineskip}
 
 \subsection{Volume form}
 

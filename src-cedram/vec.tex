@@ -87,6 +87,7 @@ Phi.display()
 \begin{NBoutM}
 \begin{array}{llcl} \Phi:& M & \longrightarrow & \mathbb{R}^3 \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, x}{x^{2} + y^{2} + 1}, \frac{2 \, y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, {x'}}{{x'}^{2} + {y'}^{2} + 1}, \frac{2 \, {y'}}{{x'}^{2} + {y'}^{2} + 1}, -\frac{{x'}^{2} + {y'}^{2} - 1}{{x'}^{2} + {y'}^{2} + 1}\right) \end{array}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 graph = XU.plot(chart=XR3, mapping=Phi, number_values=25,
                 label_axes=False) + \
@@ -212,6 +213,7 @@ vp.parent()
 \begin{NBoutM}
 T_{p}\,M
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 vp in Tp
 \end{NBin}
@@ -223,9 +225,13 @@ As other manifold objects, tangent vectors have some plotting capabilities:
 graph += vp.plot(chart=XR3, mapping=Phi, scale=0.5, color='gold')
 show(graph, viewer='threejs', online=True)
 \end{NBin}
-\begin{center}
+\begin{NBout}
+\emph{(see Figure~\ref{out2})}
+\end{NBout}
+\begin{figure}
 \includegraphics[width=0.8\textwidth]{sphere_tan_vect.png}
-\end{center}
+\caption{Output corresponding to \texttt{In [\theNBin]}.}\label{out2}
+\end{figure}
 
 The main attribute of the object \code{vp} representing the vector $\w{v}$ is the
 private dictionary \code{\_components}, which stores the components of $\w{v}$ in various bases of $T_p M$:
@@ -247,6 +253,7 @@ vpc
 \texttt{1-index components w.r.t.~Basis (d/dx,d/dy) on the Tangent space at Point p
 on the 2-dimensional differentiable manifold M}
 \end{NBout}
+\vspace*{-\baselineskip}
 \begin{NBin}
 type(vpc)
 \end{NBin}
@@ -493,6 +500,7 @@ isinstance(YU, FiniteRankFreeModule)
 \begin{NBout}
 \texttt{True}
 \end{NBout}
+\vspace*{-\baselineskip}
 \begin{NBin}
 YU.base_ring()
 \end{NBin}
@@ -549,9 +557,13 @@ class_graph(
   sage.manifolds.differentiable.vectorfield_module.VectorFieldFreeModule
 ).plot()
 \end{NBin}
-\begin{center}
+\begin{NBout}
+\emph{(see Figure~\ref{out3})}
+\end{NBout}
+\begin{figure}
 \includegraphics[width=0.7\textwidth]{vfmodule_class.png}
-\end{center}
+\caption{Output corresponding to \texttt{In [\theNBin]}.}\label{out3}
+\end{figure}
 
 Since $U$ is a chart domain, the free module $\X(U)$ is automatically endowed with a basis,
 which is the coordinate frame associated to the chart:
@@ -582,6 +594,7 @@ YV.bases()
 \begin{NBoutM}
 \left[\left(V, \left(\frac{\partial}{\partial {x'} },\frac{\partial}{\partial {y'} }\right)\right)\right]
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 eV = YV.default_basis()
 eV
@@ -681,6 +694,7 @@ v[[0]]
 \begin{NBoutM}
 f
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 v[[0]].display()
 \end{NBin}
@@ -906,6 +920,7 @@ vUc
 \begin{NBout}
 \texttt{1-index components w.r.t.~Coordinate frame (U, (d/dx,d/dy))}
 \end{NBout}
+\vspace*{-\baselineskip}
 \begin{NBin}
 type(vUc)
 \end{NBin}
@@ -1142,6 +1157,7 @@ vf
 \begin{NBoutM}
 v\left(f\right)
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 vf.display()
 \end{NBin}

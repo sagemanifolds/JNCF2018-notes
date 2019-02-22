@@ -396,7 +396,7 @@ Phi = M.diff_map(R3, {(XU, XR3):
 Phi.display()
 \end{NBin}
 \begin{NBoutM}
-\begin{array}{llcl} \Phi:& M & \longrightarrow & \mathbb{R}^3 \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, x}{x^{2} + y^{2} + 1}, \frac{2 \, y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \left(X, Y, Z\right) = \left(\frac{2 \, {x'}}{{x'}^{2} + {y'}^{2} + 1}, \frac{2 \, {y'}}{{x'}^{2} + {y'}^{2} + 1}, -\frac{{x'}^{2} + {y'}^{2} - 1}{{x'}^{2} + {y'}^{2} + 1}\right) \end{array}
+\begin{array}{llcl}\Phi:& M & \longrightarrow & \mathbb{R}^3 \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \left(X, Y, Z\right) = \displaystyle \left(\frac{2 \, x}{x^{2} + y^{2} + 1}, \frac{2 \, y}{x^{2} + y^{2} + 1}, \frac{x^{2} + y^{2} - 1}{x^{2} + y^{2} + 1}\right) \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \left(X, Y, Z\right) = \displaystyle \left(\frac{2 \, {x'}}{{x'}^{2} + {y'}^{2} + 1}, \frac{2 \, {y'}}{{x'}^{2} + {y'}^{2} + 1}, -\frac{{x'}^{2} + {y'}^{2} - 1}{{x'}^{2} + {y'}^{2} + 1}\right) \end{array}
 \end{NBoutM}
 We may use $\Phi$ for graphical purposes, for instance to display the grids
 of the stereographic charts \code{XU} (in red) and \code{XV} (in green),
@@ -409,9 +409,13 @@ graph = XU.plot(chart=XR3, mapping=Phi, number_values=25,
         p.plot(chart=XR3, mapping=Phi, label_offset=0.05)
 show(graph, viewer='threejs', online=True)
 \end{NBin}
-\begin{center}
+\begin{NBout}
+\emph{(see Figure~\ref{out})}
+\end{NBout}
+\begin{figure}
 \includegraphics[width=0.8\textwidth]{sphere_stereo.png}
-\end{center}
+\caption{Output corresponding to \texttt{In [\theNBin]}.}\label{out}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -490,6 +494,7 @@ fU.display()
 \begin{NBoutM}
 \left(x, y\right) \mapsto \frac{1}{x^{2} + y^{2} + 1}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 fV = f.coord_function(XV)
 fV.display()
@@ -513,6 +518,7 @@ fU(1,2)
 \begin{NBoutM}
 \frac{1}{6}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 fU(*XU(p))
 \end{NBin}
@@ -565,6 +571,7 @@ fU.expr()
 \begin{NBoutM}
 \frac{1}{x^{2} + y^{2} + 1}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 type(fU.expr())
 \end{NBin}
@@ -584,6 +591,7 @@ fU.expr('sympy')
 \begin{NBout}
 \verb|1/(x**2|\phantom{\verb!x!}\verb|+|\phantom{\verb!x!}\verb|y**2|\phantom{\verb!x!}\verb|+|\phantom{\verb!x!}\verb|1)|
 \end{NBout}
+\vspace*{-\baselineskip}
 \begin{NBin}
 type(fU.expr('sympy'))
 \end{NBin}
@@ -626,6 +634,7 @@ f.expr(XU)
 \begin{NBoutM}
 \frac{1}{x^{2} + y^{2} + 1}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 f.expr(XV)
 \end{NBin}
@@ -666,6 +675,7 @@ CM
 \begin{NBoutM}
 C^{\infty}\left(M\right)
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 CM.category()
 \end{NBin}
@@ -757,6 +767,7 @@ h.display()
 \begin{NBoutM}
 \begin{array}{llcl} & M & \longrightarrow & \mathbb{R} \\ \mbox{on}\ U : & \left(x, y\right) & \longmapsto & \frac{2 \, x^{2} + 2 \, y^{2} + 3}{x^{2} + y^{2} + 1} \\ \mbox{on}\ V : & \left({x'}, {y'}\right) & \longmapsto & \frac{3 \, {x'}^{2} + 3 \, {y'}^{2} + 2}{{x'}^{2} + {y'}^{2} + 1} \end{array}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 h(p)
 \end{NBin}
@@ -985,9 +996,11 @@ This happens because there exists a coercion map from the parent of $2$, namely 
 \begin{NBoutM}
 \mathbf{Z}
 \end{NBoutM}
+\vspace*{-\baselineskip}
 \begin{NBin}
 CM.has_coerce_map_from(ZZ)
 \end{NBin}
+\nopagebreak
 \begin{NBout}
 \texttt{True}
 \end{NBout}
